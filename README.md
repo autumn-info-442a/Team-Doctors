@@ -1,5 +1,5 @@
 # Team-Doctors
-INFO 442 (Team D)
+INFO 442 Team Doctors
 
 Team Members: Rani Chang (PM), Vivian Hua (Dev 1), Olivia Tang (Dev 2), and Isabella Abulhosn (Designer)
 
