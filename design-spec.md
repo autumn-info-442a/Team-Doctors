@@ -6,7 +6,7 @@ Once you click start, you are brought up to the first screen which asks you to f
 
 ![Location Page](./design-spec-images/location.png)
 
-For all following screens with a “NEXT” button, the “NEXT” button will only be able to be submitted if the required fields have been filled out. If not, and the user attempts to click the “NEXT” button, they will receive a pop-up, indicating they have to fill all required fields. After the first question, users will be shown a “BACK” button which will allow them to go back and modify their responses.
+For this and all following pages with a “NEXT” button, the “NEXT” button will only be able to be submitted if the required fields have been filled out. If not, and the user attempts to click the “NEXT” button, they will receive a pop-up, indicating they have to fill all required fields. After the first question, users will be shown a “BACK” button which will allow them to go back and modify their responses.
 
 ![Make a Selection Message](./design-spec-images/make_a_selection.png)
 
