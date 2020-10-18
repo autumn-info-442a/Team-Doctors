@@ -21,6 +21,7 @@ The next screen asks whether or not the user has insurance with the yes/no boxes
 After clicking next, now the user will see a page asking whether they will need public transportation and a short description of how we describe public transportation. If the user selects yes, a price range slider will appear and if they select no nothing will pop up.
 
 ![Transportation Page](./design-spec-images/transportation.png)
+
 ![Transportation Slider Page](./design-spec-images/transportation_slider.png)
 
 After clicking next, they are asked if they want a drive through or not as well as if they would like a translator available at testing (another yes no box check).  After selecting one of the boxes, the user can complete the survey by pressing the “SUBMIT” button. 
@@ -32,9 +33,11 @@ Once the submit button is clicked, they are taken to a page with a list of COVID
 ![Testing Centers Page](./design-spec-images/testing_centers.png)
 
 If no testing centers meet the criteria, there will be pop-up text that states that there were no testing centers that matched the criteria but will still provide the closest testing centers.
+
 ![Testing Centers No Results Page](./design-spec-images/testing_centers_no_results.png)
 
 The testing center results page will have an error message in case of failure to query for a nearby testing center. 
+
 ![Query Error Page](./design-spec-images/query_error.png)
 
 We will require a keyboard for typing in responses and clicking to submit survey questions. There will be no sounds. We will have a responsive interface for mobile and desktop.
