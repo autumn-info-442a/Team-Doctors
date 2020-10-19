@@ -1,3 +1,7 @@
+<h2> <strong>PROBLEM:</strong> </h2>
+Currently, people around Seattle are encouraged to get tested for COVID-19, however, it is not completely an equitable process to get tested. Google provides a list of COVID-19 testing centers with broad information such as whether it is drive through and whether you need an appointment. However, there are many other factors that disproportionately impact low income and minority communities from getting tested such as insurance, price, and language barriers.  
+
+<h2> <strong>SOLUTION:</strong> </h2>
 When you reach our website’s landing page, there will be a short description of the survey, and that the survey will help you find nearby COVID-19 testing centers. Then under the short description there will be a button that says start that will commence the survey’s questions. 
 
 ![Landing Page](./design-spec-images/landing.png)
