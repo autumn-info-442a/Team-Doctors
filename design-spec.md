@@ -11,9 +11,9 @@ When you reach our website’s landing page, there will be a short description o
 
 Once you click start, you are brought up to the first screen which asks you to fill in a specified location. These location text fields should be able to use the browser's autofill capability to autocomplete the location fields. For all screens with a “NEXT” button (which will be all survey questions except the last), the “NEXT” button will be disabled until all questions with an “*” are responded to. 
 
-![Location Page](./design-spec-images/address.png)
-
 ![Location Page](./design-spec-images/address-button-disabled.png)
+
+![Location Page](./design-spec-images/address.png)
 
 On all survey question screens following this location page, there will be a “BACK” button which when clicked, will allow users to go back and modify their responses from the previous page.
 
