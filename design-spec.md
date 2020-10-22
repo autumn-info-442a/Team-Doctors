@@ -1,8 +1,8 @@
-# PROBLEM: #
+# PROBLEM #
 Currently, people around Seattle are encouraged to get tested for COVID-19, however, it is [not completely an equitable process to get tested](https://www.kff.org/coronavirus-covid-19/issue-brief/low-income-and-communities-of-color-at-higher-risk-of-serious-illness-if-infected-with-coronavirus/). Google provides a list of COVID-19 testing centers with broad information such as whether it is drive through and whether you need an appointment. However, there are many other factors that disproportionately impact low income and minority communities from getting tested such as insurance, price, and language barriers. Due to these barriers and not having all testing center accomodations consolidated on one platform, it makes it difficult for low income and minority groups to find a suitable testing site thus making it even more inconvenient for them to get tested. 
 
 
-# SOLUTION: #
+# SOLUTION #
 Our solution is a website survey to help users find an appropriate testing center that meets their accommodations. 
 
 When you reach our website’s landing page, there will be a short description of the survey telling you that the survey will help you find nearby COVID-19 testing centers based upon your needs. Under the short description there will be a “START” button, when pressed, will commence the survey.
