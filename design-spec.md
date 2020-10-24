@@ -39,10 +39,6 @@ The webpage will display a list of COVID-19 testing centers in the ordering of c
 
 ![Results](./design-spec-images/results.png)
 
-If no testing centers meet the criteria, there will be pop-up text that states that there were no testing centers that matched the criteria but will still provide the closest testing centers.
-
-![Testing Centers No Results Page](./design-spec-images/results-no-criteria.png)
-
 The testing center results page will have an error message in case of failure to query for a nearby testing center. 
 
 ![Query Error Page](./design-spec-images/results-error.png)
