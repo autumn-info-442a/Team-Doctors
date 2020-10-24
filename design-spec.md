@@ -28,11 +28,11 @@ After clicking next, they are asked if they want a drive through option as well 
 
 ![Drive Through and Translator Page](./design-spec-images/drive-through-translator.png)
 
-Once the submit button is clicked, the service should first filter a dataset of Seattle testing centers to meet all of the criteria of the survey questions. After filtering, the service should sort the filtered dataset with distance from the user’s location from closest to farthest. Lastly, the service will return the sorted and filtered list of testing centers to be displayed. While the service is computing the list testing centers, the page will render a loading icon.
+Once the submit button is clicked, the service should first filter a dataset of Seattle testing centers that meet the criteria of the survey. After filtering, the service should use the number of matched criteria and distance from the user’s location to sort the list of testing centers.  The results will be ordered by the number of criteria met (from most to least).  In the event that testing centers have the same number of criteria met, they will then be ordered based upon their location (closest to furthest).  If no criteria are met, the results will default to solely sorting based upon location (closest to farthest).  Lastly, the service will return the sorted and filtered list of testing centers to be displayed. While the service is computing the results, the page will render a loading icon.
 
 ![Results](./design-spec-images/results-loading.png)
 
-The page will display a list of COVID-19 testing centers. These results will be ordered by the filters described previously: first by the amount of matching survey criteria (most to least), and then based on location (closest to farthest).  Each testing center will have its name, address (when clicked on will lead them to Google Maps with the address already filled in), hours of operation, and a phone number (which is also clickable that lets them immediately call the site). Next to each testing center, the criteria that matches the user’s survey responses will also be listed.
+The page will display a list of COVID-19 testing centers from the previously described filtering and sorting. Each testing center will have its name, address (when clicked on will lead them to Google Maps with the address already filled in), hours of operation, and a phone number (which is also clickable that lets them immediately call the number). Next to each testing center, the criteria that matches the user’s survey responses will also be listed with checkmarks.
 
 ![Results](./design-spec-images/results.png)
 
