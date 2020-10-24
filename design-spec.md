@@ -32,7 +32,7 @@ Once the submit button is clicked, the service should first filter a dataset of 
 
 ![Results](./design-spec-images/results-loading.png)
 
-The page will display a list of COVID-19 testing centers from the previously described filtering and sorting. Each testing center will have its name, address (when clicked on will lead them to Google Maps with the address already filled in), hours of operation, phone number (which is also clickable that lets them immediately call the number), and how far away it is. To the right of each testing center, the criteria that matches the user’s survey responses will also be listed with checkmarks.
+The page will display a list of COVID-19 testing centers from the previously described filtering and sorting. Each testing center will have its name, address (when clicked on will lead them to Google Maps with the address already filled in), hours of operation, phone number (which is also clickable and prompts to dial the number), and how far away it is. To the right of each testing center, the criteria that matches the user’s survey responses will also be listed with checkmarks.
 
 ![Results](./design-spec-images/results.png)
 
