@@ -1,6 +1,5 @@
 # PROBLEM #
-Currently, people around Seattle are encouraged to get tested for COVID-19, however, it is [not completely an equitable process to get tested](https://www.kff.org/coronavirus-covid-19/issue-brief/low-income-and-communities-of-color-at-higher-risk-of-serious-illness-if-infected-with-coronavirus/). Google provides a list of COVID-19 testing centers with broad information such as whether it is drive through and whether you need an appointment. However, there are many other factors that disproportionately impact low income and minority communities from getting tested such as insurance, price, and language barriers. Due to these barriers and not having all testing center accomodations consolidated on one platform, it makes it difficult for low income and minority groups to find a suitable testing site thus making it even more inconvenient for them to get tested. 
-
+Currently, people around Seattle are frequently encouraged to get tested for COVID-19, however, it is not always easy to find a testing center that fits all of your needs and/or preferences. When you search up ‘COVID-19 testing centers near me’, Google provides a list of testing centers solely based on proximity with general and vague information.  However, there are many other important factors that may determine where one chooses to get tested, such as the availability of drive-through testing, operational hours, and the need for a translator, just to name a few.  Currently, a person would need to navigate through multiple platforms to find out all of this information, which can be a confusing and time-consuming process.
 
 # SOLUTION #
 Our solution is a website survey to help users find an appropriate testing center that meets their accommodations. 
@@ -35,7 +34,7 @@ Once the submit button is clicked, the service should first filter a dataset of 
 
 ![Results](./design-spec-images/results-loading.png)
 
-The webpage will display a list of COVID-19 testing centers in the ordering of closest to farthest. There will also be a short summary of the users’ selections that they made in the survey (a quick overview).
+The page will display a list of COVID-19 testing centers. These results will be ordered by the filters described previously: first by the amount of matching survey criteria (most to least), and then based on location (closest to farthest).  Each testing center will have its name, address (when clicked on will lead them to Google Maps with the address already filled in), hours of operation, and a phone number (which is also clickable that lets them immediately call the site). Next to each testing center, the criteria that matches the user’s survey responses will also be listed.
 
 ![Results](./design-spec-images/results.png)
 
