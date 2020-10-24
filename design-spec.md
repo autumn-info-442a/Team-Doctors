@@ -20,8 +20,6 @@ After clicking the next button, the user will be asked if they are symptomatic o
 
 ![Make a Selection Message](./design-spec-images/symptomatic.png)
 
-After clicking the next button, the user will be asked if they are symptomatic or not with yes/no boxes.
-
 After clicking next, you will be taken to a screen that asks whether or not the user has insurance and whether or not they have a referral.  Referral will be defined under its respective question.  Both questions will have Yes/No checkboxes underneath.
 
 ![Referral and Insurance Page](./design-spec-images/insured-referral.png)
