@@ -59,7 +59,19 @@ function computeResults() {
 - Resides in Firebase
 - The ResultsController can ask the TestingCenterModel for testing center data
 - This TestingCenterModel stores the testing centers data including information such as: … about each testing center
+
 ```
+TestingCenterModel = {
+	name;
+	phone;
+	address;
+	symptomaticAllowed;
+	takesInsurance;
+	referralRequired;
+	driveThroughAvailable;
+	translator;
+}
+
 ```
 
 ## SurveyView
@@ -70,7 +82,15 @@ function computeResults() {
 - Displays text fields and checkboxes 
 - Displays next, back buttons to move from question to question
 - Displays a start and submit button (for applicable pages)
+
 ```
+SurveyModel = {
+	question;
+	response;
+	nextButton;
+	backButton;
+	submitButton;
+}
 ```
 
 ## ResultsView
