@@ -5,7 +5,7 @@
 - The **SurveyController** communicates with the **SurveyModel** and **SurveyView**
 - The **SurveyController** can ask the **SurveyModel** to store responses to survey questions
 - The **SurveyController** can retrieve a specific survey question response from the **SurveyModel**
-- The **SurveyController** can track the order of the survey questions
+- The **SurveyController** can keep track of the order of the survey questions and the current question that the user is on
 - The **SurveyController** can direct the **SurveyView** to the question to display
 - The **SurveyController** can go next or back in the survey question ordering
 
