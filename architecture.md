@@ -75,6 +75,15 @@ function computeResults() {
 - The **SurveyController** can ask the **SurveyModel** for a specific survey question response
 - The **ResultsController*** can ask the **SurveyModel** for survey question responses
 - The **SurveyModel** stores the survey questions (across all instances of the survey) and locally stores each user’s responses
+```
+SurveyModel = {
+	question;
+	response;
+	nextButton;
+	backButton;
+	submitButton;
+}
+```
 
 ## TestingCenterModel
 - Resides in Firebase
@@ -103,16 +112,6 @@ TestingCenterModel = {
 - Displays text fields and checkboxes 
 - Displays next, back buttons to move from question to question
 - Displays a start and submit button (for applicable pages)
-
-```
-SurveyModel = {
-	question;
-	response;
-	nextButton;
-	backButton;
-	submitButton;
-}
-```
 
 ## ResultsView
 - Resides in the client
