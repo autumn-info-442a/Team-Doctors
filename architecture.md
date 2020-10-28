@@ -22,10 +22,10 @@ function getSurveyResponse(surveyQuestion) {
 
 ## ResultsController
 - Resides in the client 
-- The ResultsController communicates with the TestingCenterModel in Firebase, the SurveyModel, and the ResultsView
-- The ResultsController can ask the SurveyModel to retrieve all responses and their corresponding survey questions
-- The ResultsController can ask the TestingCenterModel to retrieve all testing centers data
-- The ResultsController computes the testing center results list through filtering and sorting using the SurveyModel responses from the TestingCenterModel data
+- The **ResultsController** communicates with the **TestingCenterModel** in Firebase, the **SurveyModel**, and the **ResultsView**
+- The **ResultsController** can ask the **SurveyModel** to retrieve all responses and their corresponding survey questions
+- The **ResultsController** can ask the **TestingCenterModel** to retrieve all testing centers data
+- The **ResultsController** computes the testing center results list through filtering and sorting using the **SurveyModel** responses from the **TestingCenterModel** data
 
 ```
  
@@ -49,3 +49,27 @@ function computeResults() {
 }
 
 ```
+## SurveyModel
+- Resides in the client
+- The **SurveyController** can ask the **SurveyModel** for a specific survey question response
+- The **ResultsController*** can ask the **SurveyModel** for survey question responses
+- The **SurveyModel** stores the survey questions (across all instances of the survey) and locally stores each user’s responses
+
+## TestingCenterModel
+- Resides in Firebase
+- The ResultsController can ask the TestingCenterModel for testing center data
+- This TestingCenterModel stores the testing centers data including information such as: … about each testing center
+
+## SurveyView
+- Resides in the client
+- The **SurveyView** receives information to display from the **SurveyController**
+- Displays survey question and question description (if it has one)
+- Displays asterisk for required questions
+- Displays text fields and checkboxes 
+- Displays next, back buttons to move from question to question
+- Displays a start and submit button (for applicable pages)
+
+## ResultsView
+- Resides in the client
+- The **ResultsView** receives information to display from the **ResultsController**
+The **ResultsView** displays a list of “cards” of testing centers
