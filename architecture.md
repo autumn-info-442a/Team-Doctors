@@ -5,17 +5,38 @@
 - The **SurveyController** communicates with the **SurveyModel** and **SurveyView**
 - The **SurveyController** can ask the **SurveyModel** to store responses to survey questions
 - The **SurveyController** can retrieve a specific survey question response from the **SurveyModel**
+- The **SurveyController** can track the order of the survey questions
+- The **SurveyController** can direct the **SurveyView** to the question to display
+- The **SurveyController** can go next or back in the survey question ordering
 
 ## SurveyController Stubs
 ```
-// Stores the given response to the given survey question
-function saveSurveyReponse(surveyQuestion, response) {
+// Stores the given response to the given survey question and moves to the next surveyQuestion
+function goNextSurveyQuestion(response) {
+	surveyQuestion = getCurrentQuestion();
 	surveyResponses[surveyQuestion] = response;
+	// Moves survey question tracker forward one
+}
+
+// Returns the previous survey question response and moves back to the previous surveyQuestion
+function goBackSurveyQuestion {
+	// Moves survey question tracker back one
+	return getSurveyResponse(previousQuestion);
+}
+
+// Submits the survey 
+function submitSurvey {
+	// Calls on ResultsController to compute results
 }
 
 // Returns the survey response to the given survey question
 function getSurveyResponse(surveyQuestion) {
 	return surveyResponses[surveyQuestion]
+}
+
+// Tracks ordering of the survey questions and returns the current question
+function getCurrentQuestion() {
+	return surveyQuestion;
 }
 
 ```
