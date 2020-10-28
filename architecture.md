@@ -73,15 +73,15 @@ function computeResults() {
 ## SurveyModel
 - Resides in the client
 - The **SurveyController** can ask the **SurveyModel** for a specific survey question response
-- The **ResultsController*** can ask the **SurveyModel** for survey question responses
+- The **ResultsController** can ask the **SurveyModel** for survey question responses
 - The **SurveyModel** stores the survey questions (across all instances of the survey) and locally stores each user’s responses
 ```
 SurveyModel = {
 	question;
 	response;
-	nextButton;
-	backButton;
-	submitButton;
+	hasNext;
+	hasBack;
+	hasSubmit;
 }
 ```
 
