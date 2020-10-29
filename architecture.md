@@ -6,8 +6,8 @@
 - The **SurveyController** can ask the **SurveyModel** to store responses to survey questions
 - The **SurveyController** can retrieve a specific survey question response from the **SurveyModel**
 - The **SurveyController** can keep track of the order of the survey questions and the current question that the user is on
-- The **SurveyController** can direct the **SurveyView** to the current question to display
 - The **SurveyController** can go next or back in the survey question ordering
+- The **SurveyController** can direct the **SurveyView** to the current question to display
 
 ## SurveyController Stubs
 ```
