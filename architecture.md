@@ -118,4 +118,5 @@ TestingCenterModel = {
 - The **ResultsView** receives information to display from the **ResultsController**
 - The **ResultsView** displays a list of “cards” of testing centers
 
-![Architecture Diagram]("./arch-images/arch-diagram.png")
+![Arch Diagram](./arch-images/arch-diagram.png)
+
