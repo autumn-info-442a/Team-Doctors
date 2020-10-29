@@ -43,7 +43,7 @@ function getCurrentQuestion() {
 
 ## ResultsController
 - Resides in the client 
-- The **ResultsController** communicates with the **TestingCenterModel** in Firebase, the **SurveyModel**, and the **ResultsView**
+- The **ResultsController** communicates with the **TestingCenterModel** in Firebase, the **SurveyModel**, the **ResultsView**, and the Google Maps API
 - The **ResultsController** can ask the **SurveyModel** to retrieve all responses and their corresponding survey questions
 - The **ResultsController** can ask the **TestingCenterModel** to retrieve all testing centers data
 - The **ResultsController** computes the testing center results list through filtering and sorting using the **SurveyModel** responses from the **TestingCenterModel** data
@@ -65,7 +65,7 @@ function computeResults() {
 	surveyResponses = getSurveyResponses();
 	testingCenters = getTestingCenters();
 	// filter and sort testing center list of objects
-	// append distance away from provided address to testing centers list of objects
+	// append distance away from provided address (using Google Maps API) to testing centers list of objects
 	return results; 
 }
 
