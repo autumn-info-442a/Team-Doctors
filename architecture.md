@@ -77,11 +77,11 @@ function computeResults() {
 - The **SurveyModel** stores the survey questions (across all instances of the survey) and locally stores each user’s responses
 ```
 SurveyModel = {
-	question;
-	response;
-	hasNext;
-	hasBack;
-	hasSubmit;
+	question: string;
+	response: string;
+	hasNext: boolean;
+	hasBack: boolean;
+	hasSubmit: boolean;
 }
 ```
 
@@ -92,14 +92,14 @@ SurveyModel = {
 
 ```
 TestingCenterModel = {
-	name;
-	phone;
-	address;
-	symptomaticAllowed;
-	takesInsurance;
-	referralRequired;
-	driveThroughAvailable;
-	translator;
+	name: string;
+	phone: string;
+	address: string;
+	symptomaticAllowed: boolean;
+	takesInsurance: boolean;
+	referralRequired: boolean;
+	driveThroughAvailable: boolean;
+	translatorAvailable: boolean;
 }
 
 ```
