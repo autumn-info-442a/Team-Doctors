@@ -68,6 +68,8 @@ function computeResults() {
 - The **SurveyController** can ask the **SurveyQuestionModel** for a specific survey question response
 - The **SurveyController** can ask the **SurveyQuestionModel** for all survey question responses
 - The **SurveyQuestionModel** stores the survey questions (across all instances of the survey) and locally stores each user’s responses
+
+Below is the data model for a suvery question stored in the application's state. The state will store multiple survey questions. 
 ```
 SurveyQuestionModel = {
 	question: string;
@@ -82,6 +84,8 @@ SurveyQuestionModel = {
 - Resides in Firebase
 - The SurveyController can ask the TestingCenterModel for testing center data
 - This TestingCenterModel stores the testing centers data including information such as: name, phone, address, etc. about each testing center
+
+Below is the data model for a testing center stored in Firebase. Firebase will store multiple testing centers.
 
 ```
 TestingCenterModel = {
