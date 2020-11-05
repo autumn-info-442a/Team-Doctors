@@ -2,12 +2,16 @@
 
 ## SurveyController
 - Resides in the client
-- The **SurveyController** communicates with the **SurveyModel** and **SurveyView**
-- The **SurveyController** can ask the **SurveyModel** to store responses to survey questions
-- The **SurveyController** can retrieve a specific survey question response from the **SurveyModel**
+- The **SurveyController** communicates with the **SurveyQuestionModel** and **SurveyView**
+- The **SurveyController** can ask the **SurveyQuestionModel** to store responses to survey questions
+- The **SurveyController** can retrieve a specific survey question response from the **SurveyQuestionModel**
 - The **SurveyController** can keep track of the order of the survey questions and the current question that the user is on
-- The **SurveyController** can direct the **SurveyView** to the current question to display
 - The **SurveyController** can go next or back in the survey question ordering
+- The **SurveyController** can direct the **SurveyView** to the current question to display
+- The **SurveyController** communicates with the **TestingCenterModel** in Firebase, the **SurveyQuestionModel**, the **ResultsView**, and the Google Maps API
+- The **SurveyController** can ask the **SurveyQuestionModel** to retrieve all responses and their corresponding survey questions
+- The **SurveyController** can ask the **TestingCenterModel** to retrieve all testing centers data
+- The **SurveyController** computes the testing center results list through filtering and sorting using the **SurveyQuestionModel** responses from the **TestingCenterModel** data
 
 ## SurveyController Stubs
 ```
@@ -26,12 +30,7 @@ function goBackSurveyQuestion {
 
 // Submits the survey 
 function submitSurvey {
-	// Calls on ResultsController to compute results
-}
-
-// Returns the survey response to the given survey question
-function getSurveyResponse(surveyQuestion) {
-	return surveyResponses[surveyQuestion]
+	// Computes results
 }
 
 // Returns the current survey question
@@ -39,16 +38,10 @@ function getCurrentQuestion() {
 	return surveyQuestion;
 }
 
-```
-
-## ResultsController
-- Resides in the client 
-- The **ResultsController** communicates with the **TestingCenterModel** in Firebase, the **SurveyModel**, and the **ResultsView**
-- The **ResultsController** can ask the **SurveyModel** to retrieve all responses and their corresponding survey questions
-- The **ResultsController** can ask the **TestingCenterModel** to retrieve all testing centers data
-- The **ResultsController** computes the testing center results list through filtering and sorting using the **SurveyModel** responses from the **TestingCenterModel** data
-
-```
+// Returns the survey response to the given survey question
+function getSurveyResponse(surveyQuestion) {
+	return surveyResponses[surveyQuestion]
+}
  
 // Returns all survey responses
 function getSurveyResponses() {
@@ -65,41 +58,47 @@ function computeResults() {
 	surveyResponses = getSurveyResponses();
 	testingCenters = getTestingCenters();
 	// filter and sort testing center list of objects
-	// append distance away from provided address to testing centers list of objects
+	// append distance away from provided address (using Google Maps API) to testing centers list of objects
 	return results; 
 }
 
 ```
-## SurveyModel
+## SurveyQuestionModel
 - Resides in the client
-- The **SurveyController** can ask the **SurveyModel** for a specific survey question response
-- The **ResultsController** can ask the **SurveyModel** for survey question responses
-- The **SurveyModel** stores the survey questions (across all instances of the survey) and locally stores each user’s responses
+- The **SurveyController** can ask the **SurveyQuestionModel** for a specific survey question response
+- The **SurveyController** can ask the **SurveyQuestionModel** for all survey question responses
+- The **SurveyQuestionModel** stores the survey questions (across all instances of the survey) and locally stores each user’s responses
+
+Below is the data model for a suvery question stored in the application's state. The state will store multiple survey questions. 
 ```
-SurveyModel = {
-	question;
-	response;
-	hasNext;
-	hasBack;
-	hasSubmit;
+SurveyQuestionModel = {
+	id: string;
+	question: string;
+	response: string;
+	hasNext: boolean;
+	hasBack: boolean;
+	hasSubmit: boolean;
 }
 ```
 
 ## TestingCenterModel
 - Resides in Firebase
-- The ResultsController can ask the TestingCenterModel for testing center data
-- This TestingCenterModel stores the testing centers data including information such as: … about each testing center
+- The SurveyController can ask the TestingCenterModel for testing center data
+- This TestingCenterModel stores the testing centers data including information such as: name, phone, address, etc. about each testing center
+
+Below is the data model for a testing center stored in Firebase. Firebase will store multiple testing centers.
 
 ```
 TestingCenterModel = {
-	name;
-	phone;
-	address;
-	symptomaticAllowed;
-	takesInsurance;
-	referralRequired;
-	driveThroughAvailable;
-	translator;
+	id: string;
+	name: string;
+	phone: string;
+	address: string;
+	symptomaticAllowed: boolean;
+	takesInsurance: boolean;
+	referralRequired: boolean;
+	driveThroughAvailable: boolean;
+	translatorAvailable: boolean;
 }
 
 ```
@@ -115,7 +114,7 @@ TestingCenterModel = {
 
 ## ResultsView
 - Resides in the client
-- The **ResultsView** receives information to display from the **ResultsController**
+- The **ResultsView** receives information to display from the **SurveyController**
 - The **ResultsView** displays a list of “cards” of testing centers
 
-![Architecture Diagram]("./arch-images/architecture-diagram.png")
+
