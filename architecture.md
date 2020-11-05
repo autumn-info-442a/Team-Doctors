@@ -72,6 +72,7 @@ function computeResults() {
 Below is the data model for a suvery question stored in the application's state. The state will store multiple survey questions. 
 ```
 SurveyQuestionModel = {
+	id: string;
 	question: string;
 	response: string;
 	hasNext: boolean;
@@ -89,6 +90,7 @@ Below is the data model for a testing center stored in Firebase. Firebase will s
 
 ```
 TestingCenterModel = {
+	id;
 	name: string;
 	phone: string;
 	address: string;
