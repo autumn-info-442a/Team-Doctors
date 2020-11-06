@@ -19,12 +19,12 @@ As it is the project manager’s job to coordinate with the team, we decided to 
         * *We created our own private chat for Team Doctors where we generally communicate about homework and upcoming due dates*  
     * *Discord : INFO 442 Server*  
         * *If for some reason, discord only works for servers, we can also call in “Team Doctors” voice room and chat room*  
-    * *Zoom *  
+    * *Zoom*  
         * *If Discord fails, the project manager will provide a Zoom link where we can meet up and work on the project!*  
 
 We chose to use discord as our main mode of communication because it is the easiest application to use in our opinion. Discord allows us to have everything in one area as our classroom is also via Discord. We are able to voice call and screen share which makes working together much more seamless. However the possibility of Discord failing is not impossible, so our backup application to use would be Zoom. We are all familiar with Zoom so the transition between Discord and Zoom would not be difficult at all.   
 
-3. Who will own components in your architecture?
+3. Who will own components in your architecture?  
 * Owning them means being responsible for writing them and making sure they are functional and correct.  
 * For each component, list the one person who is in charge of getting it done.
     * *SurveyController*  
@@ -64,7 +64,7 @@ We decided to our developer ownership of the controller because she has experien
 
 We have a more ambitious timeline.  We want to get an early start which is why we want the UI done at the end of next week.  We think it is possible to get an MVP done the week after that, so we can start fixing and editing the UI early, as well as testing early.  After we have a complete app, we will try to break it ourselves.  We want to improve and finalize our app without a rush before the launch party.  
 
-5. How will you verify that you've met your requirements?
+5. How will you verify that you've met your requirements?  
 **All of our requirements listed below will be verified manually**
 
 We chose to do manual testing because we have a lot of visual components which makes it easy to check if they render correctly or not.  It is also beneficial for our project specifically because our webapp has one to two simple inputs for each rendered page which makes it easy to manually systematically check everything is going the way we want it to.  We also think manual testing would be more beneficial than automated testing because of our simplistic design.  We can really take it step by step and watch what is going on in the front-end as well as the back-end.  Our plan is to verify as we build each component. Commit very often when working on a function or small module. Verify and then push every time you get a function or small module working for each component.At the very end, we plan to do a complete re-verification to make sure that our system works once all integrated together.
