@@ -16,11 +16,8 @@ Once you click start, you are brought up to the first screen which asks you to f
 
 On all survey question screens following this location page, there will be a “BACK” button which when clicked, will allow users to go back and modify their responses from the previous page.
 
-After clicking the next button, the user will be asked if they are symptomatic or not (based upon a given list of symptoms) with Yes/No checkboxes.  For every question with a Yes/No checkbox, the user will only be allowed to check one or the other, not both.
 
-![Make a Selection Message](./design-spec-images/symptomatic.png)
-
-After clicking next, you will be taken to a screen that asks whether or not the user has insurance and whether or not they have a referral.  Referral will be defined under its respective question.  Both questions will have Yes/No checkboxes underneath.
+After clicking next, you will be taken to a screen that asks whether or not the user has insurance.  There will be a Yes/No checkbox.
 
 ![Referral and Insurance Page](./design-spec-images/insured-referral.png)
 
