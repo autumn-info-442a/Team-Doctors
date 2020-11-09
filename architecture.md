@@ -94,9 +94,7 @@ TestingCenterModel = {
 	name: string;
 	phone: string;
 	address: string;
-	symptomaticAllowed: boolean;
 	takesInsurance: boolean;
-	referralRequired: boolean;
 	driveThroughAvailable: boolean;
 	translatorAvailable: boolean;
 }
