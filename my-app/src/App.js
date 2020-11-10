@@ -1,12 +1,10 @@
 import './App.css';
+import React, {Component} from 'react';
+import SurveyController from './Controllers/SurveyController'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Where2Test</h1>
-      </header>
-    </div>
+    <SurveyController></SurveyController>
   );
 }
 
