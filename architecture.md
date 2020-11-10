@@ -2,13 +2,12 @@
 
 ## SurveyController
 - Resides in the client
-- The **SurveyController** communicates with the **SurveyQuestionModel** and **SurveyView**
-- The **SurveyController** can ask the **SurveyQuestionModel** to store responses to survey questions
-- The **SurveyController** can retrieve a specific survey question response from the **SurveyQuestionModel**
+- The **SurveyController** communicates with the **SurveyQuestionModel** in Firebase, the **SurveyView**, the **TestingCenterModel** in Firebase, the **ResultsView**, and the Google Maps API
+- The **SurveyController** can ask the **SurveyQuestionModel** to retrieve the survey question fields
+- The **SurveyController** can retrieve and store a specific question response in the application's local state
 - The **SurveyController** can keep track of the order of the survey questions and the current question that the user is on
 - The **SurveyController** can go next or back in the survey question ordering
 - The **SurveyController** can direct the **SurveyView** to the current question to display
-- The **SurveyController** communicates with the **TestingCenterModel** in Firebase, the **SurveyQuestionModel**, the **ResultsView**, and the Google Maps API
 - The **SurveyController** can ask the **SurveyQuestionModel** to retrieve all responses and their corresponding survey questions
 - The **SurveyController** can ask the **TestingCenterModel** to retrieve all testing centers data
 - The **SurveyController** computes the testing center results list through filtering and sorting using the **SurveyQuestionModel** responses from the **TestingCenterModel** data
