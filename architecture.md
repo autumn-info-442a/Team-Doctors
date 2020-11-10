@@ -15,6 +15,18 @@
 
 ## SurveyController Stubs
 ```
+// Populates local state with survey questions and survey question fields
+function getSurveyQuestions() {
+	// Sets initial local state to survey questions with information on whether it has a next button, submit button, and back button.
+	// Sets response as empty initally for each survey question.
+}
+
+
+// Returns the current survey question
+function getCurrentQuestion() {
+	return surveyQuestion;
+}
+
 // Stores the given response to the given survey question and moves to the next surveyQuestion
 function goNextSurveyQuestion(response) {
 	surveyQuestion = getCurrentQuestion();
@@ -31,11 +43,6 @@ function goBackSurveyQuestion {
 // Submits the survey 
 function submitSurvey {
 	// Computes results
-}
-
-// Returns the current survey question
-function getCurrentQuestion() {
-	return surveyQuestion;
 }
 
 // Returns the survey response to the given survey question
