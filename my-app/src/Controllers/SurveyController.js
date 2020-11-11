@@ -71,6 +71,10 @@ class SurveyController extends Component {
         var testingCenters = this.getTestingCenters();
         var responses = this.getSurveyResponses();
         var filteredTestingCenters = testingCenters.filter();
+        // TODO
+        // filter by criteria
+        // sort by distance
+        // integrate google maps api
         return filteredTestingCenters;
     }
 
