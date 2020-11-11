@@ -10,23 +10,21 @@ class SurveyController extends Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.getSurveyQuestions();
     }
 
     getSurveyQuestions() {
         var surveyQuestionRef = db.ref("SurveyQuestions");
-        var listOfQuestions = [];
-
+        var questionsList = [];
         surveyQuestionRef.on('value', function(snapshot) {
             var data = snapshot.val();
             data.forEach(surveyQuestion => {
-                surveyQuestion.Response = "";
-                listOfQuestions.push(surveyQuestion);
+                surveyQuestion.Response = "N/A";
+                questionsList.push(surveyQuestion);
             })
         });   
-
-        this.setState({questions: listOfQuestions});
+        this.setState({questions: questionsList});
     }
 
     getCurrentQuestion() {
@@ -46,11 +44,15 @@ class SurveyController extends Component {
     }
 
     getSurveyResponse(surveyQuestion) {
-
+        return this.state.questions[surveyQuestion].Response;
     }
 
     getSurveyResponses() {
-
+        var responses = [];
+        this.state.questions.forEach(question => {
+            responses.push(question.response);
+        });
+        return responses;
     }
 
     getTestingCenters() {
@@ -66,10 +68,15 @@ class SurveyController extends Component {
     }
 
     computeResults() {
-
+        var testingCenters = this.getTestingCenters();
+        var responses = this.getSurveyResponses();
+        var filteredTestingCenters = testingCenters.filter();
+        return filteredTestingCenters;
     }
 
     render() {
+        console.log(this.state.questions);
+        console.log(this.getSurveyResponse(0));
         return <div></div>
     }
 }
