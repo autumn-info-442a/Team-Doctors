@@ -5,7 +5,8 @@ class SurveyController extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            questions: []
+            questions: [],
+            currentQuestion: 0
         }
     }
 
@@ -19,53 +20,56 @@ class SurveyController extends Component {
 
         surveyQuestionRef.on('value', function(snapshot) {
             var data = snapshot.val();
-            data.forEach(row => {
-                row.Response = "";
-                listOfQuestions.push(row);
+            data.forEach(surveyQuestion => {
+                surveyQuestion.Response = "";
+                listOfQuestions.push(surveyQuestion);
             })
         });   
 
         this.setState({questions: listOfQuestions});
     }
 
-    /*
-    function getCurrentQuestion() {
-
+    getCurrentQuestion() {
+        return this.state.questions[this.state.currentQuestion];
     }
 
-    function goNextSurveyQuestion(response) {
-
+    goNextSurveyQuestion(response) {
+        this.setState({currentQuestion: this.state.currentQuestion + 1});
     }
     
-    function goBackSurveyQuestion() {
+    goBackSurveyQuestion() {
+        this.setState({currentQuestion: this.state.currentQuestion - 1});
+    }
+
+    submitSurvey() {
 
     }
 
-    function submitSurvey() {
+    getSurveyResponse(surveyQuestion) {
 
     }
 
-    function getSurveyResponse(surveyQuestion) {
+    getSurveyResponses() {
 
     }
 
-    function getSurveyResponses() {
-
-    }
-
-    function getTestingCenters() {
+    getTestingCenters() {
+        var testingCentersList = [];
         var testingSitesRef = db.ref("TestingSites");
         testingSitesRef.on('value', function(snapshot) {
-            console.log(snapshot.val());
+            var data = snapshot.val();
+            data.forEach(testingCenter => {
+                testingCentersList.push(testingCenter);
+            })
         });
+        return testingCentersList;
     }
 
-    function computeResults() {
+    computeResults() {
 
-    } */
+    }
 
     render() {
-        console.log(this.state);
         return <div></div>
     }
 }
