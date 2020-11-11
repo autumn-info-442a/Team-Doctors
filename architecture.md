@@ -2,19 +2,30 @@
 
 ## SurveyController
 - Resides in the client
-- The **SurveyController** communicates with the **SurveyQuestionModel** and **SurveyView**
-- The **SurveyController** can ask the **SurveyQuestionModel** to store responses to survey questions
-- The **SurveyController** can retrieve a specific survey question response from the **SurveyQuestionModel**
+- The **SurveyController** communicates with the **SurveyQuestionModel** in Firebase, the **SurveyView**, the **TestingCenterModel** in Firebase, the **ResultsView**, and the Google Maps API
+- The **SurveyController** can ask the **SurveyQuestionModel** to retrieve the survey question fields
+- The **SurveyController** can retrieve and store a specific question response from the application's local state
+- The **SurveyController** can retrieve all responses to survey questions from the application's local state
 - The **SurveyController** can keep track of the order of the survey questions and the current question that the user is on
 - The **SurveyController** can go next or back in the survey question ordering
 - The **SurveyController** can direct the **SurveyView** to the current question to display
-- The **SurveyController** communicates with the **TestingCenterModel** in Firebase, the **SurveyQuestionModel**, the **ResultsView**, and the Google Maps API
-- The **SurveyController** can ask the **SurveyQuestionModel** to retrieve all responses and their corresponding survey questions
 - The **SurveyController** can ask the **TestingCenterModel** to retrieve all testing centers data
 - The **SurveyController** computes the testing center results list through filtering and sorting using the **SurveyQuestionModel** responses from the **TestingCenterModel** data
 
 ## SurveyController Stubs
 ```
+// Populates local state with survey questions and survey question fields
+function getSurveyQuestions() {
+	// Sets initial local state to survey questions with information on whether it has a next button, submit button, and back button.
+	// Sets response as empty initally for each survey question.
+}
+
+
+// Returns the current survey question
+function getCurrentQuestion() {
+	return surveyQuestion;
+}
+
 // Stores the given response to the given survey question and moves to the next surveyQuestion
 function goNextSurveyQuestion(response) {
 	surveyQuestion = getCurrentQuestion();
@@ -31,11 +42,6 @@ function goBackSurveyQuestion {
 // Submits the survey 
 function submitSurvey {
 	// Computes results
-}
-
-// Returns the current survey question
-function getCurrentQuestion() {
-	return surveyQuestion;
 }
 
 // Returns the survey response to the given survey question
@@ -94,9 +100,7 @@ TestingCenterModel = {
 	name: string;
 	phone: string;
 	address: string;
-	symptomaticAllowed: boolean;
 	takesInsurance: boolean;
-	referralRequired: boolean;
 	driveThroughAvailable: boolean;
 	translatorAvailable: boolean;
 }
