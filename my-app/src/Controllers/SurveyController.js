@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import google from 'react';
 import { db } from '../Services/firebase';
 
 class SurveyController extends Component {
@@ -70,17 +71,42 @@ class SurveyController extends Component {
     computeResults() {
         var testingCenters = this.getTestingCenters();
         var responses = this.getSurveyResponses();
-        var filteredTestingCenters = testingCenters.filter();
-        // TODO
+        var filteredTestingCenters = [];
+        
         // filter by criteria
-        // sort by distance
+        filteredTestingCenters = testingCenters.filter(function(testingCenter) { 
+            return testingCenter["Drive-Through"] == "true" && testingCenter.Insurance == "true" && testingCenter.Translator == "true"
+        });
+    
         // integrate google maps api
+
+        // sort by distance
+
         return filteredTestingCenters;
     }
 
+    getDistance() {
+        //Find the distance
+        var distanceService = new google.maps.DistanceMatrixService();
+        distanceService.getDistanceMatrix({
+            origins: ["Greenwich, Greater London, UK", "13 Great Carleton Square, Edinburgh, City of Edinburgh EH16 4, UK"],
+            destinations: ["Stockholm County, Sweden", "Dlouhá 609/2, 110 00 Praha-Staré Město, Česká republika"],
+            travelMode: google.maps.TravelMode.DRIVING,
+            unitSystem: google.maps.UnitSystem.IMPERIAL,
+            durationInTraffic: true,
+            avoidHighways: false,
+            avoidTolls: false
+        },
+        function (response, status) {
+            if (status !== google.maps.DistanceMatrixStatus.OK) {
+                console.log('Error:', status);
+            } else {
+                console.log(response);
+            }
+        });
+    }
+
     render() {
-        console.log(this.state.questions);
-        console.log(this.getSurveyResponse(0));
         return <div></div>
     }
 }
