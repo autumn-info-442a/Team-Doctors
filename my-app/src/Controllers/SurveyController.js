@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import google from 'react';
+// import google from 'react';
 import { db } from '../Services/firebase';
 
 class SurveyController extends Component {
@@ -11,12 +11,12 @@ class SurveyController extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.getSurveyQuestions();
     }
 
     getSurveyQuestions() {
-        var surveyQuestionRef = db.ref("SurveyQuestions");
+        var surveyQuestionRef = db.ref("surveyQuestions");
         var questionsList = [];
         surveyQuestionRef.on('value', function(snapshot) {
             var data = snapshot.val();
@@ -58,7 +58,7 @@ class SurveyController extends Component {
 
     getTestingCenters() {
         var testingCentersList = [];
-        var testingSitesRef = db.ref("TestingSites");
+        var testingSitesRef = db.ref("testingSites");
         testingSitesRef.on('value', function(snapshot) {
             var data = snapshot.val();
             data.forEach(testingCenter => {
@@ -68,47 +68,70 @@ class SurveyController extends Component {
         return testingCentersList;
     }
 
-    computeResults() {
+    async computeResults() {
         var testingCenters = this.getTestingCenters();
-        var responses = this.getSurveyResponses();
+        // var responses = this.getSurveyResponses();
         var filteredTestingCenters = [];
         
         // filter by criteria
-        filteredTestingCenters = testingCenters.filter(function(testingCenter) { 
-            return testingCenter["Drive-Through"] == "true" && testingCenter.Insurance == "true" && testingCenter.Translator == "true"
+        filteredTestingCenters = testingCenters.filter(function(tc) { 
+            return tc["driveThrough"] === true && tc["insurance"] === true && tc["translator"] === true
         });
     
         // integrate google maps api
+        var addresses = [];
+        filteredTestingCenters.forEach(tc => {
+            addresses.push(tc.address);
+        });
+        var distancesFromCenters = [];
+        var response = await this.getDistances(addresses);
+        var results = response.rows[0].elements;
+
+        for (var i = 0; i < results.length; i++) {
+          var element = results[i];
+          var distance = element.distance.text;
+          distancesFromCenters.push(distance);
+        }
+
+        for (var i = 0; i < filteredTestingCenters.length; i++) {
+            var distance = distancesFromCenters[i];
+            var distanceArr = distance.split(" ");
+            var mileage = parseFloat(distanceArr[0]);
+            filteredTestingCenters[i].distanceAway = mileage;
+        }
 
         // sort by distance
-
+        filteredTestingCenters.sort((a, b) => (a.distanceAway > b.distanceAway) ? 1 : -1);
+        console.log(filteredTestingCenters);
         return filteredTestingCenters;
     }
 
-    getDistance() {
-        //Find the distance
-        var distanceService = new google.maps.DistanceMatrixService();
-        distanceService.getDistanceMatrix({
-            origins: ["Greenwich, Greater London, UK", "13 Great Carleton Square, Edinburgh, City of Edinburgh EH16 4, UK"],
-            destinations: ["Stockholm County, Sweden", "Dlouhá 609/2, 110 00 Praha-Staré Město, Česká republika"],
-            travelMode: google.maps.TravelMode.DRIVING,
-            unitSystem: google.maps.UnitSystem.IMPERIAL,
-            durationInTraffic: true,
-            avoidHighways: false,
-            avoidTolls: false
-        },
-        function (response, status) {
-            if (status !== google.maps.DistanceMatrixStatus.OK) {
-                console.log('Error:', status);
-            } else {
-                console.log(response);
-            }
+    getDistances(addresses) {
+        //Find the distances
+        var distanceService = new window.google.maps.DistanceMatrixService();
+        return new Promise((resolve, reject) => {
+            distanceService.getDistanceMatrix({
+                origins: ["5252 15th Ave NE Seattle, WA 98105"],
+                destinations: addresses,
+                travelMode: window.google.maps.TravelMode.DRIVING,
+                unitSystem: window.google.maps.UnitSystem.IMPERIAL
+            }, 
+            function (response, status) {
+                if (status !== window.google.maps.DistanceMatrixStatus.OK) {
+                    console.log("Error: ", status);
+                } else {
+                    resolve(response);
+                    return response;
+                }
+            });
         });
     }
-
+    
     render() {
+        this.computeResults();
         return <div></div>
     }
 }
 
 export default SurveyController
+
