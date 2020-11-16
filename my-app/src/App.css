@@ -1,16 +1,108 @@
 .App {
   text-align: center;
+  background-color: white;
+  color: black;
+  margin: 2rem;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  /*font-size: calc(10px + 2vmin);*/
+}
+
+.Question-page{
+  text-align: left;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.Q {
+  font-size: 50px;
+  margin-bottom: 1rem;
+}
+
+.required {
+  color: #772E25;
+}
+
+.Location-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 1.5rem;
+}
+
+.Address-field, .State-field, .City-field, .Zip-field {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 30px;
+}
+
+#Address, #City, #State, #Zip {
+  background-color: #F2F2F2;
+  border-radius: 25px;
+  width: 75%;
+  height: 50px;
+  margin-right: 1.5rem;
+}
+
+.Checkboxes {
+  font-size: 40px;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 4rem;
+}
+
+#No, #Yes {
+  width: 50px;
+  height: 50px;
+  margin-right: 1rem;
+}
+
+.Nav-Buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Nav-btn {
+  background-color: #197278;
+  width: 135px;
+  height: 60px;
+  border-radius: 15px;
+  font-size: 40px;
+}
+
+.Box {
+  height: 15px;
+  width: 15px;
+}
+
+h1 {
+  font-size: 100px;
+  font-weight: bolder;
+}
+
+.Descr {
+  font-size: 30px;
+}
+
+.Start-btn {
+  background-color: #197278;
+  margin: 2.5rem;
+  width: 180px;
+  height: 80px;
+  border-radius: 25px;
+  font-size: 50px;
 }
 
 .App-link {
