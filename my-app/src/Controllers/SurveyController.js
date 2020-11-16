@@ -33,7 +33,12 @@ class SurveyController extends Component {
     }
 
     goNextSurveyQuestion(response) {
-        this.setState({currentQuestion: this.state.currentQuestion + 1});
+        var getQuestion = this.getCurrentQuestion;
+        getQuestion.response = response;
+        this.setState({
+            question: getQuestion,
+            currentQuestion: this.state.currentQuestion + 1
+        });
     }
     
     goBackSurveyQuestion() {
@@ -76,22 +81,25 @@ class SurveyController extends Component {
         var insurance = true;
         var translator = true;
 
-        /* var driveThrough = this.questions.driveThrough.response;
-        var insurance = this.questions.insurance.response;
-        var translator = this.questions.translator.response;*/
+        // TODO: integrate with actual survey responses
+        /* var driveThrough = this.questions[1].response;
+        var insurance = this.questions.insurance[2].response;
+        var translator = this.questions.translator[3].response;*/
 
         // filter by criteria
         var filteredTestingCenters = driveThrough === false ? testingCenters : testingCenters.filter(tc => tc.driveThrough === true);
         filteredTestingCenters = insurance === false ? filteredTestingCenters : filteredTestingCenters.filter(tc => tc.insurance === true);
         filteredTestingCenters = translator === false ? filteredTestingCenters : filteredTestingCenters.filter(tc => tc.translator === true);
 
-        // integrate google maps api
+        // get distance away from specificed location 
         var addresses = [];
         filteredTestingCenters.forEach(tc => {
             addresses.push(tc.address);
         });
 
-        var response = await this.getDistances(addresses);
+        // var origin = this.questions[0].response;
+        var origin = "10521 Meridian Ave N. Seattle, WA 98105";
+        var response = await this.getDistances(origin, addresses);
         var results = response.rows[0].elements;
 
         for (var i = 0; i < results.length; i++) {
@@ -108,12 +116,12 @@ class SurveyController extends Component {
         return filteredTestingCenters;
     }
 
-    getDistances(addresses) {
+    getDistances(origin, addresses) {
         //Find the distances
         var distanceService = new window.google.maps.DistanceMatrixService();
         return new Promise((resolve, reject) => {
             distanceService.getDistanceMatrix({
-                origins: ["5252 15th Ave NE Seattle, WA 98105"],
+                origins: [origin],
                 destinations: addresses,
                 travelMode: window.google.maps.TravelMode.DRIVING,
                 unitSystem: window.google.maps.UnitSystem.IMPERIAL
@@ -130,7 +138,6 @@ class SurveyController extends Component {
     }
     
     render() {
-        this.computeResults();
         return <div></div>
     }
 }
