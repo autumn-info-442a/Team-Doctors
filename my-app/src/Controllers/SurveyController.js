@@ -71,33 +71,35 @@ class SurveyController extends Component {
     async computeResults() {
         var testingCenters = this.getTestingCenters();
         // var responses = this.getSurveyResponses();
-        var filteredTestingCenters = [];
-        
+
+        var driveThrough = false;
+        var insurance = true;
+        var translator = true;
+
+        /* var driveThrough = this.questions.driveThrough.response;
+        var insurance = this.questions.insurance.response;
+        var translator = this.questions.translator.response;*/
+
         // filter by criteria
-        filteredTestingCenters = testingCenters.filter(function(tc) { 
-            return tc["driveThrough"] === true && tc["insurance"] === true && tc["translator"] === true
-        });
-    
+        var filteredTestingCenters = driveThrough === false ? testingCenters : testingCenters.filter(tc => tc.driveThrough === true);
+        filteredTestingCenters = insurance === false ? filteredTestingCenters : filteredTestingCenters.filter(tc => tc.insurance === true);
+        filteredTestingCenters = translator === false ? filteredTestingCenters : filteredTestingCenters.filter(tc => tc.translator === true);
+
         // integrate google maps api
         var addresses = [];
         filteredTestingCenters.forEach(tc => {
             addresses.push(tc.address);
         });
-        var distancesFromCenters = [];
+
         var response = await this.getDistances(addresses);
         var results = response.rows[0].elements;
 
         for (var i = 0; i < results.length; i++) {
           var element = results[i];
           var distance = element.distance.text;
-          distancesFromCenters.push(distance);
-        }
-
-        for (var i = 0; i < filteredTestingCenters.length; i++) {
-            var distance = distancesFromCenters[i];
-            var distanceArr = distance.split(" ");
-            var mileage = parseFloat(distanceArr[0]);
-            filteredTestingCenters[i].distanceAway = mileage;
+          var distanceArr = distance.split(" ");
+          var mileage = parseFloat(distanceArr[0]);
+          filteredTestingCenters[i].distanceAway = mileage;
         }
 
         // sort by distance
