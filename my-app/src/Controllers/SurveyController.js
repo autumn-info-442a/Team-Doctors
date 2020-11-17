@@ -77,7 +77,7 @@ class SurveyController extends Component {
         var testingCenters = this.getTestingCenters();
         // var responses = this.getSurveyResponses();
 
-        var driveThrough = false;
+        var driveThrough = true;
         var insurance = true;
         var translator = true;
 
@@ -98,7 +98,7 @@ class SurveyController extends Component {
         });
 
         // var origin = this.questions[0].response;
-        var origin = "10521 Meridian Ave N. Seattle, WA 98105";
+        var origin = ["1851 NE Grant Ln, Seattle, WA 98105"];
         var response = await this.getDistances(origin, addresses);
         var results = response.rows[0].elements;
 
@@ -121,7 +121,7 @@ class SurveyController extends Component {
         var distanceService = new window.google.maps.DistanceMatrixService();
         return new Promise((resolve, reject) => {
             distanceService.getDistanceMatrix({
-                origins: [origin],
+                origins: origin,
                 destinations: addresses,
                 travelMode: window.google.maps.TravelMode.DRIVING,
                 unitSystem: window.google.maps.UnitSystem.IMPERIAL
@@ -138,6 +138,7 @@ class SurveyController extends Component {
     }
     
     render() {
+        this.computeResults();
         return <div></div>
     }
 }
