@@ -82,9 +82,9 @@ class SurveyController extends Component {
         var translator = true;
 
         // TODO: integrate with actual survey responses
-        /* var driveThrough = this.questions[1].response;
-        var insurance = this.questions.insurance[2].response;
-        var translator = this.questions.translator[3].response;*/
+        /* var driveThrough = this.state.questions[1].response;
+        var insurance = this.state.questions.insurance[2].response;
+        var translator = this.state.questions.translator[3].response;*/
 
         // filter by criteria
         var filteredTestingCenters = driveThrough === false ? testingCenters : testingCenters.filter(tc => tc.driveThrough === true);
@@ -97,8 +97,9 @@ class SurveyController extends Component {
             addresses.push(tc.address);
         });
 
-        // var origin = this.questions[0].response;
-        var origin = ["1851 NE Grant Ln, Seattle, WA 98105"];
+        var origin = [];
+        origin.push("1851 NE Grant Ln, Seattle, WA 98105");
+        // origin.push(this.state.questions[0].response);
         var response = await this.getDistances(origin, addresses);
         var results = response.rows[0].elements;
 
