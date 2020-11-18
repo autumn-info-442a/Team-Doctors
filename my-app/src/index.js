@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+//import App from './App';
 import reportWebVitals from './reportWebVitals';
+import LandingPage from './LandingPage';
+import QuestionTemplate from './QuestionTemplate';
+import TwoQuestionTemplate from './TwoQuestionTemplate';
+import LocationQuestion from './LocationQuestion';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <TwoQuestionTemplate />
   </React.StrictMode>,
   document.getElementById('root')
 );
