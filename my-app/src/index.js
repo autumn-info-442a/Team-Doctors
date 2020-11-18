@@ -5,11 +5,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import LandingPage from './LandingPage';
 import QuestionTemplate from './QuestionTemplate';
+import TwoQuestionTemplate from './TwoQuestionTemplate';
 import LocationQuestion from './LocationQuestion';
 
 ReactDOM.render(
   <React.StrictMode>
-    <QuestionTemplate />
+    <TwoQuestionTemplate />
   </React.StrictMode>,
   document.getElementById('root')
 );
