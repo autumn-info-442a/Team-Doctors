@@ -1,8 +1,12 @@
-import "./App.css";
+import React, {Component} from 'react';
 
-function LocationQuestion() {
-  return (
-    <div className="App">
+class LocationQuestion extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
       <div className="Question-page">
         <div className="Question">
           <p className="Q">
@@ -30,16 +34,16 @@ function LocationQuestion() {
             </form>
         </div>
         <div className="Nav-Buttons">
-          <button type="button" className="Nav-btn">
+          <button onClick={this.props.goback} type="button" className="Nav-btn">
             BACK
           </button>
-          <button type="button" className="Nav-btn">
+          <button onClick={this.props.goNext} type="button" className="Nav-btn">
             NEXT
           </button>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default LocationQuestion;
