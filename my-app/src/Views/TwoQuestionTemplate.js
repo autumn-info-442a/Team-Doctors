@@ -60,7 +60,7 @@ class TwoQuestionTemplate extends Component {
             BACK
           </button>
           <button type="button" className="Nav-btn">
-            NEXT
+            SUBMIT
           </button>
         </div>
       </div>

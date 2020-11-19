@@ -82,6 +82,10 @@
   font-size: 40px;
 }
 
+.Location-next {
+  justify-content: flex-end;
+}
+
 .Box {
   height: 15px;
   width: 15px;
@@ -102,6 +106,10 @@ h1 {
   width: 180px;
   height: 80px;
   border-radius: 25px;
+  font-size: 50px;
+}
+
+.Error-message {
   font-size: 50px;
 }
 
