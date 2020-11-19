@@ -1,16 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-//import App from './App';
+import SurveyController from './SurveyController';
 import reportWebVitals from './reportWebVitals';
-import LandingPage from './LandingPage';
-import QuestionTemplate from './QuestionTemplate';
-import TwoQuestionTemplate from './TwoQuestionTemplate';
-import LocationQuestion from './LocationQuestion';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TwoQuestionTemplate />
+    <SurveyController></SurveyController>
   </React.StrictMode>,
   document.getElementById('root')
 );

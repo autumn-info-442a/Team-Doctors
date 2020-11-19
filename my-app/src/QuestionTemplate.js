@@ -1,8 +1,5 @@
-import "./App.css";
-
 function QuestionTemplate() {
   return (
-    <div className="App">
       <div className="Question-page">
         <div className="Question">
           <p className="Q">Test Question. <span className="required">*</span></p>
@@ -38,7 +35,6 @@ function QuestionTemplate() {
           </button>
         </div>
       </div>
-    </div>
   );
 }
 
