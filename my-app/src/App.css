@@ -82,6 +82,13 @@
   font-size: 40px;
 }
 
+.Nav-Buttons-One {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 2rem;
+}
+
 .Box {
   height: 15px;
   width: 15px;
@@ -102,6 +109,10 @@ h1 {
   width: 180px;
   height: 80px;
   border-radius: 25px;
+  font-size: 50px;
+}
+
+.Error-message {
   font-size: 50px;
 }
 
