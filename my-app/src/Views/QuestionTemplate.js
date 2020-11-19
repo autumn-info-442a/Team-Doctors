@@ -10,7 +10,7 @@ class QuestionTemplate extends Component {
       <div className="App">
         <div className="Question-page">
           <div className="Question">
-            <p className="Q">Test Question. <span className="required">*</span></p>
+            <p className="Q">Do you have insurance? <span className="required">*</span></p>
             <div className="Checkboxes">
               <div className="CB">
                 <input
