@@ -1,5 +1,6 @@
 import './App.css';
 import { db } from './Services/firebase';
+import google from 'react';
 import React, {Component} from 'react';
 import LandingPage from './Views/LandingPage';
 import LocationQuestion from './Views/LocationQuestion';
