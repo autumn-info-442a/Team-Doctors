@@ -5,70 +5,99 @@ import React, {Component} from 'react';
 import LandingPage from './Views/LandingPage';
 import LocationQuestion from './Views/LocationQuestion';
 import QuestionTemplate from './Views/QuestionTemplate';
-import TwoQuestionTemplate from './Views/TwoQuestionTemplate';
+import ResultsPage from './Views/ResultsPage';
+import { render } from '@testing-library/react';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
         questions: [],
-        currentQuestion: 0
+        responses: [],
+        pageIndex: 0,
     }
-    this.getSurveyQuestions = this.getSurveyQuestions.bind(this);
+
+    this.loadQuestionsAndResponses = this.loadQuestionsAndResponses.bind(this);
     this.getCurrentQuestion = this.getCurrentQuestion.bind(this);
-    this.goNextSurveyQuestion = this.goNextSurveyQuestion.bind(this);
-    this.goBackSurveyQuestion = this.goBackSurveyQuestion.bind(this);
+    this.startSurvey = this.startSurvey.bind(this);
+    this.goNext = this.goNext.bind(this);
+    this.goBack = this.goBack.bind(this);
     this.getSurveyResponse = this.getSurveyResponse.bind(this);
     this.getTestingCenters = this.getTestingCenters.bind(this);
     this.submitSurvey = this.submitSurvey.bind(this);
     this.computeResults = this.computeResults.bind(this);
     this.getDistances = this.getDistances.bind(this);
   }
-
+  
   componentDidMount() {
-      this.getSurveyQuestions();
+      var questionsList = this.loadQuestionsAndResponses2();
+      var responseList = [];
+      for (var i = 0; i < questionsList.length; i++) {
+          responseList.push("N/A");
+      }
+      this.setState({questions: questionsList, responses: responseList});
   }
 
-  getSurveyQuestions() {
+  loadQuestionsAndResponses2() {
+      return db.ref("surveyQuestions").once('value').then(function(snapshot) {
+        var questions = [];
+        var data = snapshot.val();
+        data.forEach(function(q) {
+            console.log(q);
+            questions.push(q);
+        });
+        return Promise.all(questions);
+      });
+  }
+
+  async loadQuestionsAndResponses() {
       var surveyQuestionRef = db.ref("surveyQuestions");
       var questionsList = [];
       surveyQuestionRef.on('value', function(snapshot) {
           var data = snapshot.val();
-          data.forEach(surveyQuestion => {
-              surveyQuestion.Response = "N/A";
+          data.forEach(async surveyQuestion => {
               questionsList.push(surveyQuestion);
           })
       });   
-      this.setState({questions: questionsList});
+    await Promise.all(questionsList);
+    return questionsList;
   }
 
   getCurrentQuestion() {
-      return this.state.questions[this.state.currentQuestion];
+    return this.state.pageIndex - 1;
   }
 
-  goNextSurveyQuestion(response) {
-      var getQuestion = this.getCurrentQuestion;
-      getQuestion.response = response;
-      this.setState({
-          question: getQuestion,
-          currentQuestion: this.state.currentQuestion + 1
-      });
+  startSurvey() {
+      this.setState({pageIndex: this.state.pageIndex + 1});
   }
 
-  goBackSurveyQuestion() {
-      this.setState({currentQuestion: this.state.currentQuestion - 1});
+  goNext = (response) => {
+    if (response != null) {
+        var updateResponses = this.state.responses;
+        updateResponses[this.getCurrentQuestion()] = response;
+        this.setState({
+            responses: updateResponses,
+        });
+    }
+    this.setState({
+        pageIndex: this.state.pageIndex + 1
+    });
   }
 
-  getSurveyResponse(surveyQuestion) {
-      return this.state.questions[surveyQuestion].Response;
+  goBack() {
+      this.setState({pageIndex: this.state.pageIndex - 1});
+  }
+
+  getSurveyResponse(pageIndex) {
+      return this.state.questions[this.getCurrentQuestion()].response;
   }
 
   getSurveyResponses() {
-      var responses = [];
-      this.state.questions.forEach(question => {
-          responses.push(question.response);
-      });
-      return responses;
+      return this.state.responses;
+  }
+
+  submitSurvey() {
+
   }
 
   getTestingCenters() {
@@ -81,10 +110,6 @@ class App extends Component {
           })
       });
       return testingCentersList;
-  }
-
-  submitSurvey() {
-
   }
 
   async computeResults() {
@@ -112,7 +137,8 @@ class App extends Component {
       });
 
       var origin = [];
-      origin.push("1851 NE Grant Ln, Seattle, WA 98105");
+      const location = this.state.questions[0].location;
+      origin.push(''.concat(location.address, ' ', location.city, ' ', location.stateName, ' ', location.zip));
       // origin.push(this.state.questions[0].response);
       var response = await this.getDistances(origin, addresses);
       var results = response.rows[0].elements;
@@ -151,15 +177,20 @@ class App extends Component {
       });
   }
   render() {
-    const questionIndex = this.state.currentQuestion;
+    const pageIndex = this.state.pageIndex;
+    const questions = this.state.questions;
+    const responses = this.state.responses;
+
     console.log(this.state);
     return (
-      <div className="App">
-          {questionIndex === 0 ? <LandingPage startSurvey={this.goNextSurveyQuestion}></LandingPage> : null}
-          {questionIndex === 1 ? <LocationQuestion goNext={this.goNextSurveyQuestion}></LocationQuestion> : null}
-          {questionIndex >= 2 && questionIndex <= 3 ? <QuestionTemplate goNext={this.goNextSurveyQuestion} goBack={this.goBackSurveyQuestion}></QuestionTemplate> : null}
-          {questionIndex === 4 ? <TwoQuestionTemplate></TwoQuestionTemplate> : null}
-      </div>
+      (this.state.questions !== undefined && this.state.responses !== undefined)  === true ? <div className="App">
+          {pageIndex === 0 ? <LandingPage startSurvey={this.startSurvey}></LandingPage> : null}
+          {pageIndex === 1 ? <LocationQuestion goNext={this.goNext}></LocationQuestion> : null}
+          {pageIndex === 2 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Do you have insurance?"}></QuestionTemplate> : null}
+          {pageIndex === 3 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Do you want a drive-through testing option?"}></QuestionTemplate> : null}
+          {pageIndex === 4 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Would you like a translator available to you?"}></QuestionTemplate> : null}
+          {pageIndex === 5 ? <ResultsPage></ResultsPage> : null}
+      </div> : <div><h1>loading...</h1></div>
     );
   }
 
