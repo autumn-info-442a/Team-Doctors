@@ -35,10 +35,10 @@ class QuestionTemplate extends Component {
             </div>
           </div>
           <div className="Nav-Buttons">
-            <button onClick={this.props.goNext} type="button" className="Nav-btn">
+            <button onClick={this.props.goBack} type="button" className="Nav-btn">
               BACK
             </button>
-            <button onClick={this.props.goBack} type="button" className="Nav-btn">
+            <button onClick={this.props.goNext} type="button" className="Nav-btn">
               NEXT
             </button>
           </div>
