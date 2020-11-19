@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import LandingPage from './Views/LandingPage';
 import LocationQuestion from './Views/LocationQuestion';
 import QuestionTemplate from './Views/QuestionTemplate';
+import TwoQuestionTemplate from './Views/TwoQuestionTemplate';
 
 class App extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class App extends Component {
     this.goBackSurveyQuestion = this.goBackSurveyQuestion.bind(this);
     this.getSurveyResponse = this.getSurveyResponse.bind(this);
     this.getTestingCenters = this.getTestingCenters.bind(this);
+    this.submitSurvey = this.submitSurvey.bind(this);
     this.computeResults = this.computeResults.bind(this);
     this.getDistances = this.getDistances.bind(this);
   }
@@ -78,6 +80,10 @@ class App extends Component {
           })
       });
       return testingCentersList;
+  }
+
+  submitSurvey() {
+
   }
 
   async computeResults() {
@@ -149,8 +155,9 @@ class App extends Component {
     return (
       <div className="App">
           {questionIndex === 0 ? <LandingPage startSurvey={this.goNextSurveyQuestion}></LandingPage> : null}
-          {questionIndex === 1 ? <LocationQuestion goNext={this.goNextSurveyQuestion} goBack={this.goBackSurveyQuestion}></LocationQuestion> : null}
-          {questionIndex >= 2 && questionIndex <= 4 ? <QuestionTemplate goNext={this.goNextSurveyQuestion} goBack={this.goBackSurveyQuestion}></QuestionTemplate> : null}
+          {questionIndex === 1 ? <LocationQuestion goNext={this.goNextSurveyQuestion}></LocationQuestion> : null}
+          {questionIndex >= 2 && questionIndex <= 3 ? <QuestionTemplate goNext={this.goNextSurveyQuestion} goBack={this.goBackSurveyQuestion}></QuestionTemplate> : null}
+          {questionIndex === 4 ? <TwoQuestionTemplate></TwoQuestionTemplate> : null}
       </div>
     );
   }

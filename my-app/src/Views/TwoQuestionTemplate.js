@@ -1,8 +1,9 @@
-import "./App.css";
+import React, {Component} from 'react';
 
-function TwoQuestionTemplate() {
-  return (
-    <div className="App">
+class TwoQuestionTemplate extends Component {
+  
+  render() {
+    return (
       <div className="Question-page">
         <div className="Question">
           <p className="Q">Test Question. <span className="required">*</span></p>
@@ -63,8 +64,8 @@ function TwoQuestionTemplate() {
           </button>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default TwoQuestionTemplate;
