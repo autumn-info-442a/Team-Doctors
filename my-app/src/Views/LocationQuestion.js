@@ -5,24 +5,46 @@ class LocationQuestion extends Component {
   constructor(props) {
     super(props);
     this.canGoNext = this.canGoNext.bind(this);
-    this.state = {};
+    this.handleChange = this.handleChange.bind(this);
+    this.state = {
+      address: "",
+      city: "",
+      stateName: "",
+      zip: ""
+    };
   }
 
-  async canGoNext() {
-    var address = "";
-    var fieldsFilledOut = true;
-    var validAddress = await this.checkValidAddress(address);
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
 
-    if (fieldsFilledOut && validAddress) {
-      this.props.goNext();
+  canGoNext() {
+    var location = {address: this.state.address, city: this.state.city, stateName: this.state.stateName, zip: this.state.zip};
+    var fieldsFilledOut = this.checkFields();
+    
+    if (fieldsFilledOut) {
+      var validLocation = this.checkValidLocation(location);
+      if (validLocation) {
+        this.props.goNext(location);
+      } else {
+        alert("Invalid address");
+      }
     } else {
-      alert("Fill out all fields")
+        alert("Fill out all fields");
     }
   }
 
-  checkValidAddress(address) {
-    var geocoder = new window.google.maps.Geocoder();
+  checkFields() {
+    const {address, city, stateName, zip } = this.state;
+    var filledOut = (address.length > 0) && (city.length > 0) && (stateName.length > 0) && (zip.length > 0);
+    return filledOut;
+  }
 
+  checkValidLocation(location) {
+    var address = ''.concat(location.address, " ", location.city, " ", location.stateName, " ", location.zip);
+    /*var geocoder = new window.google.maps.Geocoder();
 
     return new Promise((resolve, reject) => {
       geocoder.geocode({
@@ -32,11 +54,11 @@ class LocationQuestion extends Component {
           resolve(results);
           return true;
         } else {
-          alert("Invalid address");
           return false;
         }
-      });
-  });
+      });*/
+      return true;
+  //});
   }
 
   render() {
@@ -50,19 +72,19 @@ class LocationQuestion extends Component {
         <div className="Location-form">
             <form className="Full-address">
                 <div className="Address-field">
-                    <input type="text" id="Address" name="Address"></input>
+                    <input onChange={this.handleChange} type="text" id="Address" name="address" value={ this.state.address }></input>
                     <label for="Address">Address</label>
                 </div>
                 <div className="City-field">
-                    <input type="text" id="City" name="City"></input>
+                    <input onChange={this.handleChange} type="text" id="City" name="city" value={ this.state.city }></input>
                     <label for="City">City</label>
                 </div>
                 <div className="State-field">
-                    <input type="text" id="State" name="State"></input>
+                    <input onChange={this.handleChange} type="text" id="State" name="stateName" value={ this.state.stateName }></input>
                     <label for="State">State</label>
                 </div>
                 <div className="Zip-field">
-                    <input type="text" id="Zip" name="Zip"></input>
+                    <input onChange={this.handleChange} type="text" id="Zip" name="zip" value={ this.state.zip }></input>
                     <label for="Zip">Zip</label>
                 </div>
             </form>
