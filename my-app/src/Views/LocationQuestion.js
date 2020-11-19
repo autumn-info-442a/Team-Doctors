@@ -1,8 +1,42 @@
 import React, {Component} from 'react';
+import google from 'react';
 
 class LocationQuestion extends Component {
   constructor(props) {
     super(props);
+    this.canGoNext = this.canGoNext.bind(this);
+    this.state = {};
+  }
+
+  async canGoNext() {
+    var address = "";
+    var fieldsFilledOut = true;
+    var validAddress = await this.checkValidAddress(address);
+
+    if (fieldsFilledOut && validAddress) {
+      this.props.goNext();
+    } else {
+      alert("Fill out all fields")
+    }
+  }
+
+  checkValidAddress(address) {
+    var geocoder = new window.google.maps.Geocoder();
+
+
+    return new Promise((resolve, reject) => {
+      geocoder.geocode({
+        'address': address
+      }, function(results, status) {
+        if (status === window.google.maps.GeocoderStatus.OK && results.length > 0) {
+          resolve(results);
+          return true;
+        } else {
+          alert("Invalid address");
+          return false;
+        }
+      });
+  });
   }
 
   render() {
@@ -33,8 +67,8 @@ class LocationQuestion extends Component {
                 </div>
             </form>
         </div>
-        <div className="Nav-Buttons-One">
-          <button onClick={this.props.goNext} type="button" className="Nav-btn">
+        <div className="Nav-Buttons">
+          <button onClick={this.canGoNext} type="button" className="Nav-btn">
             NEXT
           </button>
         </div>
