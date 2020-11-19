@@ -112,6 +112,37 @@ h1 {
   font-size: 50px;
 }
 
+.Result-intro {
+  font-size: 50px;
+}
+
+.Result-explanation {
+  font-size: 25px;
+}
+
+.Result-card {
+  border: 1px solid black;
+  border-radius: 25px;
+}
+
+.Result-section-flexbox {
+  display: flex;
+  flex-direction: column;
+  margin: 2.5rem;
+}
+
+.Single-result-flexbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.Card-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .Error-message {
   font-size: 50px;
 }
