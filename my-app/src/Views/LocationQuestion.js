@@ -33,8 +33,8 @@ class LocationQuestion extends Component {
                 </div>
             </form>
         </div>
-        <div className="Nav-Buttons">
-          <button onClick={this.props.goNext} type="button" className="Nav-btn Location-next">
+        <div className="Nav-Buttons-One">
+          <button onClick={this.props.goNext} type="button" className="Nav-btn">
             NEXT
           </button>
         </div>

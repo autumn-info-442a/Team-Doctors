@@ -82,8 +82,11 @@
   font-size: 40px;
 }
 
-.Location-next {
+.Nav-Buttons-One {
+  display: flex;
+  flex-direction: row;
   justify-content: flex-end;
+  margin-right: 2rem;
 }
 
 .Box {

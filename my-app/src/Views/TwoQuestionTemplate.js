@@ -6,7 +6,7 @@ class TwoQuestionTemplate extends Component {
     return (
       <div className="Question-page">
         <div className="Question">
-          <p className="Q">Test Question. <span className="required">*</span></p>
+          <p className="Q">Do you want a drive-through testing option? <span className="required">*</span></p>
           <div className="Checkboxes">
             <div className="CB">
               <input
@@ -31,7 +31,7 @@ class TwoQuestionTemplate extends Component {
           </div>
         </div>
         <div className="Question">
-          <p className="Q">Test Question 2. <span className="required">*</span></p>
+          <p className="Q">Would you like a translator available for you? <span className="required">*</span></p>
           <div className="Checkboxes">
             <div className="CB">
               <input
