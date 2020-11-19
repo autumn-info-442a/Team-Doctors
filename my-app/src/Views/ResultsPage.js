@@ -19,17 +19,17 @@ class ResultsPage extends Component {
                         <p className="Testing-center-address">12345 10th St, Seattle, WA 98105</p>
                         <p className="Testing-center-hours">Open: Mon-Fri</p>
                         <div className="Card-bottom">
-                            <div className="Testing-phone">
-                                <p>555-555-5555</p>
+                            <div>
+                                <p className="Testing-phone">555-555-5555</p>
                             </div>
-                            <div className="Testing-distance">
-                                <p>3 miles</p>
+                            <div>
+                                <p className="Testing-distance">3 miles</p>
                             </div>
                         </div>
                     </div>
                     <div className="Criteria-checklist">
-                        <p>\u2713 Sample Criteria 1</p>
-                        <p>\u2713 Sample Criteria 2</p>
+                        <p className="Criteria"><span className="Checkmark">&#10003;</span> Sample Criteria 1</p>
+                        <p className="Criteria"><span className="Checkmark">&#10003;</span> Sample Criteria 2</p>
                     </div>
                 </div>
             </div>

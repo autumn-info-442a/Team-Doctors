@@ -123,6 +123,11 @@ h1 {
 .Result-card {
   border: 1px solid black;
   border-radius: 25px;
+  width: 60%;
+  text-align: left;
+  padding: .5rem;
+  padding-left: 2rem;
+  padding-right: 3rem;
 }
 
 .Result-section-flexbox {
@@ -141,6 +146,52 @@ h1 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.Testing-center {
+  font-size: 30px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  font-weight: bolder;
+}
+
+.Testing-center-address {
+  font-size: 25px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  color: #283D3B;
+  font-weight: bold;
+}
+
+.Testing-center-hours {
+  font-size: 20px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+.Testing-phone {
+  font-size: 20px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+.Testing-distance {
+  font-size: 25px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  font-weight: bold;
+}
+
+.Criteria-checklist {
+  font-size: 18px;
+}
+
+.Criteria {
+  margin: .5rem;
+}
+
+.Checkmark {
+  color: green;
 }
 
 .Error-message {
