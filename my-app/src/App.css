@@ -112,6 +112,88 @@ h1 {
   font-size: 50px;
 }
 
+.Result-intro {
+  font-size: 50px;
+}
+
+.Result-explanation {
+  font-size: 25px;
+}
+
+.Result-card {
+  border: 1px solid black;
+  border-radius: 25px;
+  width: 60%;
+  text-align: left;
+  padding: .5rem;
+  padding-left: 2rem;
+  padding-right: 3rem;
+}
+
+.Result-section-flexbox {
+  display: flex;
+  flex-direction: column;
+  margin: 2.5rem;
+}
+
+.Single-result-flexbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.Card-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Testing-center {
+  font-size: 30px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  font-weight: bolder;
+}
+
+.Testing-center-address {
+  font-size: 25px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  color: #283D3B;
+  font-weight: bold;
+}
+
+.Testing-center-hours {
+  font-size: 20px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+.Testing-phone {
+  font-size: 20px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+.Testing-distance {
+  font-size: 25px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  font-weight: bold;
+}
+
+.Criteria-checklist {
+  font-size: 24px;
+}
+
+.Criteria {
+  margin: 1rem;
+}
+
+.Checkmark {
+  color: #197278;
+}
+
 .Error-message {
   font-size: 50px;
 }
