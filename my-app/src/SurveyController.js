@@ -75,10 +75,6 @@ class App extends Component {
       return this.state.questions[this.getCurrentQuestion()].response;
   }
 
-  getSurveyResponses() {
-      return this.state.responses;
-  }
-
   async getTestingCenters() {
       var testingCentersList = [];
       var testingSitesRef = db.ref("testingSites");
@@ -100,9 +96,9 @@ class App extends Component {
         alert("Error retrieving testing centers, please try again later");
       }
 
-      var driveThrough = this.state.responses[0] === "Yes";
-      var insurance = this.state.responses[1] === "Yes";
-      var translator = this.state.responses[2] === "Yes";
+      var driveThrough = this.state.responses[0] === "Yes" ? true : false;
+      var insurance = this.state.responses[1] === "Yes" ? true : false;
+      var translator = this.state.responses[2] === "Yes" ? true : false;
 
       // filter by criteria
       var filteredTestingCenters = driveThrough === false ? testingCenters : testingCenters.filter(tc => tc.driveThrough === true);
@@ -114,14 +110,10 @@ class App extends Component {
       filteredTestingCenters.forEach(tc => {
           addresses.push(tc.address);
       });
-
-      var origin = [];
-      const location = this.state.responses[0];
-      origin.push(location);
       var distanceService = new window.google.maps.DistanceMatrixService();
       distanceService.getDistanceMatrix(
         {
-          origins: origin,
+          origins: [this.state.responses[0]],
           destinations: addresses,
           travelMode: window.google.maps.TravelMode.DRIVING,
           unitSystem: window.google.maps.UnitSystem.IMPERIAL 
