@@ -6,7 +6,6 @@ import LandingPage from './Views/LandingPage';
 import LocationQuestion from './Views/LocationQuestion';
 import QuestionTemplate from './Views/QuestionTemplate';
 import ResultsPage from './Views/ResultsPage';
-import { render } from '@testing-library/react';
 
 class App extends Component {
   constructor(props) {
@@ -15,6 +14,7 @@ class App extends Component {
         questions: [],
         responses: [],
         pageIndex: 0,
+        results: []
     }
 
     this.getSurveyQuestions = this.getSurveyQuestions.bind(this);
@@ -24,12 +24,10 @@ class App extends Component {
     this.goBack = this.goBack.bind(this);
     this.getSurveyResponse = this.getSurveyResponse.bind(this);
     this.getTestingCenters = this.getTestingCenters.bind(this);
-    this.submitSurvey = this.submitSurvey.bind(this);
     this.computeResults = this.computeResults.bind(this);
-    this.getDistances = this.getDistances.bind(this);
   }
   
-  componentWillMount() {
+  async componentWillMount() {
       this.getSurveyQuestions();
   }
 
@@ -81,11 +79,7 @@ class App extends Component {
       return this.state.responses;
   }
 
-  submitSurvey() {
-
-  }
-
-  getTestingCenters() {
+  async getTestingCenters() {
       var testingCentersList = [];
       var testingSitesRef = db.ref("testingSites");
       testingSitesRef.on('value', function(snapshot) {
@@ -98,17 +92,17 @@ class App extends Component {
   }
 
   async computeResults() {
-      var testingCenters = this.getTestingCenters();
-      // var responses = this.getSurveyResponses();
+      var testingCenters = [];
+      try {
+        testingCenters = await this.getTestingCenters();
+      } catch (error) {
+        console.log(error);
+        alert("Error retrieving testing centers, please try again later");
+      }
 
-      var driveThrough = true;
-      var insurance = true;
-      var translator = true;
-
-      // TODO: integrate with actual survey responses
-      /* var driveThrough = this.state.questions[1].response;
-      var insurance = this.state.questions.insurance[2].response;
-      var translator = this.state.questions.translator[3].response;*/
+      var driveThrough = this.state.responses[0] === "Yes";
+      var insurance = this.state.responses[1] === "Yes";
+      var translator = this.state.responses[2] === "Yes";
 
       // filter by criteria
       var filteredTestingCenters = driveThrough === false ? testingCenters : testingCenters.filter(tc => tc.driveThrough === true);
@@ -122,50 +116,42 @@ class App extends Component {
       });
 
       var origin = [];
-      const location = this.state.questions[0].location;
+      const location = this.state.responses[0];
       origin.push(''.concat(location.address, ' ', location.city, ' ', location.stateName, ' ', location.zip));
-      // origin.push(this.state.questions[0].response);
-      var response = await this.getDistances(origin, addresses);
-      var results = response.rows[0].elements;
-
-      for (var i = 0; i < results.length; i++) {
-        var element = results[i];
-        var distance = element.distance.text;
-        var distanceArr = distance.split(" ");
-        var mileage = parseFloat(distanceArr[0]);
-        filteredTestingCenters[i].distanceAway = mileage;
-      }
-
-      // sort by distance
-      filteredTestingCenters.sort((a, b) => (a.distanceAway > b.distanceAway) ? 1 : -1);
-      return filteredTestingCenters;
-  }
-
-  getDistances(origin, addresses) {
-      //Find the distances
       var distanceService = new window.google.maps.DistanceMatrixService();
-      return new Promise((resolve, reject) => {
-          distanceService.getDistanceMatrix({
-              origins: origin,
-              destinations: addresses,
-              travelMode: window.google.maps.TravelMode.DRIVING,
-              unitSystem: window.google.maps.UnitSystem.IMPERIAL
-          }, 
-          function (response, status) {
-              if (status !== window.google.maps.DistanceMatrixStatus.OK) {
-                  console.log("Error: ", status);
-              } else {
-                  resolve(response);
-                  return response;
-              }
-          });
-      });
+      distanceService.getDistanceMatrix(
+        {
+          origins: origin,
+          destinations: addresses,
+          travelMode: window.google.maps.TravelMode.DRIVING,
+          unitSystem: window.google.maps.UnitSystem.IMPERIAL 
+        },
+        function (response, status) {
+          if (status !== window.google.maps.DistanceMatrixStatus.OK) {
+              alert("Service error, please try again later");
+              console.log("Error: ", status);
+          } else {
+            var results = response.rows[0].elements;
+            for (var i = 0; i < results.length; i++) {
+                var element = results[i];
+                var distance = element.distance.text;
+                var distanceArr = distance.split(" ");
+                var mileage = parseFloat(distanceArr[0]);
+                filteredTestingCenters[i].distanceAway = mileage;
+            }
+            // sort by distance
+            filteredTestingCenters.sort((a, b) => (a.distanceAway > b.distanceAway) ? 1 : -1);
+            console.log(filteredTestingCenters);
+            this.setState({results: filteredTestingCenters});
+          }
+        }.bind(this)
+    )
   }
+
   render() {
     const pageIndex = this.state.pageIndex;
     const questions = this.state.questions;
     const responses = this.state.responses;
-
     console.log(this.state);
     return (
       (this.state.questions !== undefined && this.state.responses !== undefined)  === true ? <div className="App">
@@ -174,11 +160,10 @@ class App extends Component {
           {pageIndex === 2 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Do you have insurance?"}></QuestionTemplate> : null}
           {pageIndex === 3 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Do you want a drive-through testing option?"}></QuestionTemplate> : null}
           {pageIndex === 4 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Would you like a translator available to you?"}></QuestionTemplate> : null}
-          {pageIndex === 5 ? <ResultsPage></ResultsPage> : null}
-      </div> : <div><h1>loading...</h1></div>
+          {pageIndex === 5 ? <ResultsPage computeResults={this.computeResults} results={this.state.results}></ResultsPage> : null}
+      </div> : <div><h1>Loading...</h1></div>
     );
   }
-
 }
 
 export default App;

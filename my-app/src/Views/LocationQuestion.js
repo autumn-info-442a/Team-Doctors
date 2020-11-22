@@ -12,6 +12,7 @@ class LocationQuestion extends Component {
     };
     this.canGoNext = this.canGoNext.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.checkValidLocation = this.checkValidLocation.bind(this);
   }
 
   handleChange = (event) => {
@@ -20,16 +21,14 @@ class LocationQuestion extends Component {
     });
   }
 
-  canGoNext() {
+  async canGoNext() {
     var location = {address: this.state.address, city: this.state.city, stateName: this.state.stateName, zip: this.state.zip};
     var fieldsFilledOut = this.checkFields();
     
     if (fieldsFilledOut) {
-      var validLocation = this.checkValidLocation(location);
+      var validLocation = await this.checkValidLocation(location);
       if (validLocation) {
         this.props.goNext(location);
-      } else {
-        alert("Invalid address");
       }
     } else {
         alert("Fill out all fields");
@@ -43,22 +42,21 @@ class LocationQuestion extends Component {
   }
 
   checkValidLocation(location) {
-    var address = ''.concat(location.address, " ", location.city, " ", location.stateName, " ", location.zip);
-    /*var geocoder = new window.google.maps.Geocoder();
-
-    return new Promise((resolve, reject) => {
+    var address = ''.concat(location.address, ", ", location.city, " ", location.stateName, " ", location.zip);
+    var geocoder = new window.google.maps.Geocoder();
+    return new Promise(function(resolve, reject) {
       geocoder.geocode({
         'address': address
       }, function(results, status) {
+        console.log(status);
         if (status === window.google.maps.GeocoderStatus.OK && results.length > 0) {
-          resolve(results);
-          return true;
+          resolve(true);
         } else {
-          return false;
+          reject(false);
+          alert("Invalid Address");
         }
-      });*/
-      return true;
-  //});
+      });
+    });
   }
 
   render() {
