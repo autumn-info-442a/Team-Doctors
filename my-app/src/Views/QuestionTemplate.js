@@ -3,11 +3,29 @@ import React, {Component} from 'react';
 class QuestionTemplate extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      checked: ""
+    };
+    this.handleCheck = this.handleCheck.bind(this);
+    this.canGoNext = this.canGoNext.bind(this);
+  }
+
+  handleCheck = (event) => {
+    this.setState({
+      checked: event.target.value
+    });
+  }
+
+  canGoNext() {
+    if (this.state.checked === "") {
+      alert("Please make a selection");
+    } else {
+      this.props.goNext(this.state.checked);
+    } 
   }
 
   render() {
     return (
-      <div className="App">
         <div className="Question-page">
           <div className="Question">
             <p className="Q">{this.props.questionText}<span className="required">*</span></p>
@@ -19,6 +37,8 @@ class QuestionTemplate extends Component {
                   name="Yes"
                   value="Yes"
                   className="Box"
+                  checked={this.state.checked === "Yes"}
+                  onChange={this.handleCheck}
                 />
                 <label for="Yes">Yes</label>
               </div>
@@ -29,6 +49,8 @@ class QuestionTemplate extends Component {
                   name="No"
                   value="No"
                   className="Box"
+                  checked={this.state.checked === "No"}
+                  onChange={this.handleCheck}
                 />
                 <label for="No">No</label>
               </div>
@@ -38,12 +60,11 @@ class QuestionTemplate extends Component {
             <button onClick={this.props.goBack} type="button" className="Nav-btn">
               BACK
             </button>
-            <button onClick={this.props.goNext} type="button" className="Nav-btn">
+            <button onClick={this.canGoNext} type="button" className="Nav-btn">
               NEXT
             </button>
           </div>
         </div>
-      </div>
     );
   }
 }

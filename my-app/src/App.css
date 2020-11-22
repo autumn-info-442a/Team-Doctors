@@ -183,15 +183,15 @@ h1 {
 }
 
 .Criteria-checklist {
-  font-size: 18px;
+  font-size: 24px;
 }
 
 .Criteria {
-  margin: .5rem;
+  margin: 1rem;
 }
 
 .Checkmark {
-  color: green;
+  color: #197278;
 }
 
 .Error-message {

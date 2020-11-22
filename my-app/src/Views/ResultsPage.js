@@ -1,3 +1,4 @@
+import { render } from '@testing-library/react';
 import React, {Component} from 'react';
 
 class ResultsPage extends Component {
@@ -5,8 +6,18 @@ class ResultsPage extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.computeResults();
+  }
+
   render() {
+      const results = this.props.results;
+      var showList = [];
+      results.forEach(result => {
+        showList.push(<p>{result.name}</p>);
+      });
       return (
+        
         <div>
             <div>
                 <p className="Result-intro">Here are the testing centers you should go to based on your selections:</p>
