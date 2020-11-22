@@ -23,12 +23,20 @@ class LocationQuestion extends Component {
 
   async canGoNext() {
     var address = ''.concat(this.state.address, ", ", this.state.city, " ", this.state.stateName, " ", this.state.zip);
+    
+    var location =  {
+      address: this.state.address,
+      city: this.state.city,
+      stateName: this.state.stateName,
+      zip: this.state.zip
+    }
+
     var fieldsFilledOut = this.checkFields();
     
     if (fieldsFilledOut) {
       var validLocation = await this.checkValidLocation(address);
       if (validLocation) {
-        this.props.goNext(address);
+        this.props.goNext(location);
       }
     } else {
         alert("Fill out all fields");

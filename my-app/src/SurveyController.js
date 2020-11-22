@@ -96,14 +96,38 @@ class App extends Component {
         alert("Error retrieving testing centers, please try again later");
       }
 
-      var driveThrough = this.state.responses[1] === "Yes" ? true : false;
-      var insurance = this.state.responses[2] === "Yes" ? true : false;
-      var translator = this.state.responses[3] === "Yes" ? true : false;
+      var driveThrough = this.state.responses[1] === "Yes";
+      var insurance = this.state.responses[2] === "Yes";
+      var translator = this.state.responses[3] === "Yes";
 
       // filter by criteria
-      var filteredTestingCenters = driveThrough === false ? testingCenters : testingCenters.filter(tc => tc.driveThrough === true);
-      filteredTestingCenters = insurance === false ? filteredTestingCenters : filteredTestingCenters.filter(tc => tc.insurance === true);
-      filteredTestingCenters = translator === false ? filteredTestingCenters : filteredTestingCenters.filter(tc => tc.translator === true);
+      function filterDriveThrough(centers, driveThrough) {
+        if (driveThrough === false) {
+            return centers.driveThrough;
+        } else {
+            return centers.driveThrough === true;
+        }
+      }
+
+      function filterInsurance(centers, insurance) {
+        if (insurance === true) {
+            return centers.insurance === true;
+        }
+      }
+
+      function filterTranslator(centers, translator) {
+        if (translator === false) {
+            return centers.translator;
+        } else {
+            return centers.translator === true;
+        }
+      }
+
+      var filteredTestingCenters = testingCenters.filter(filterDriveThrough, driveThrough).filter(filterInsurance, insurance).filter(filterTranslator, translator);
+
+      // get survey address
+      var origin = ''.concat(this.state.responses[0].address, ", ", this.state.responses[0].city, " ", this.state.responses[0].stateName, " ", this.state.responses[0].zip);
+      console.log(origin);
 
       // get distance away from specificed location 
       var addresses = [];
@@ -113,7 +137,7 @@ class App extends Component {
       var distanceService = new window.google.maps.DistanceMatrixService();
       distanceService.getDistanceMatrix(
         {
-          origins: [this.state.responses[0]],
+          origins: [origin],
           destinations: addresses,
           travelMode: window.google.maps.TravelMode.DRIVING,
           unitSystem: window.google.maps.UnitSystem.IMPERIAL 
