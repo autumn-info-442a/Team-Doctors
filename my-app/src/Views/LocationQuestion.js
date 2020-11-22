@@ -4,14 +4,14 @@ import google from 'react';
 class LocationQuestion extends Component {
   constructor(props) {
     super(props);
-    this.canGoNext = this.canGoNext.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.state = {
       address: "",
       city: "",
       stateName: "",
       zip: ""
     };
+    this.canGoNext = this.canGoNext.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange = (event) => {

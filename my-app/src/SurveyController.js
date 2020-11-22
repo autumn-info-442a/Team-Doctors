@@ -17,7 +17,7 @@ class App extends Component {
         pageIndex: 0,
     }
 
-    this.loadQuestionsAndResponses = this.loadQuestionsAndResponses.bind(this);
+    this.getSurveyQuestions = this.getSurveyQuestions.bind(this);
     this.getCurrentQuestion = this.getCurrentQuestion.bind(this);
     this.startSurvey = this.startSurvey.bind(this);
     this.goNext = this.goNext.bind(this);
@@ -29,39 +29,24 @@ class App extends Component {
     this.getDistances = this.getDistances.bind(this);
   }
   
-  componentDidMount() {
-      var questionsList = this.loadQuestionsAndResponses2();
-      var responseList = [];
-      for (var i = 0; i < questionsList.length; i++) {
-          responseList.push("N/A");
-      }
-      this.setState({questions: questionsList, responses: responseList});
+  componentWillMount() {
+      this.getSurveyQuestions();
   }
 
-  loadQuestionsAndResponses2() {
-      return db.ref("surveyQuestions").once('value').then(function(snapshot) {
-        var questions = [];
+  getSurveyQuestions() {
+    var surveyQuestionRef = db.ref("surveyQuestions");
+    var questionsList = [];
+    var responsesList = [];
+    surveyQuestionRef.on('value', function(snapshot) {
         var data = snapshot.val();
-        data.forEach(function(q) {
-            console.log(q);
-            questions.push(q);
-        });
-        return Promise.all(questions);
-      });
+        data.forEach(surveyQuestion => {
+            questionsList.push(surveyQuestion);
+            responsesList.push("No response");
+        })
+    });   
+    this.setState({questions: questionsList, responses: responsesList});
   }
 
-  async loadQuestionsAndResponses() {
-      var surveyQuestionRef = db.ref("surveyQuestions");
-      var questionsList = [];
-      surveyQuestionRef.on('value', function(snapshot) {
-          var data = snapshot.val();
-          data.forEach(async surveyQuestion => {
-              questionsList.push(surveyQuestion);
-          })
-      });   
-    await Promise.all(questionsList);
-    return questionsList;
-  }
 
   getCurrentQuestion() {
     return this.state.pageIndex - 1;
