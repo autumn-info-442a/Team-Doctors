@@ -85,7 +85,7 @@ class LocationQuestion extends Component {
                 </div>
             </form>
         </div>
-        <div className="Nav-Buttons">
+        <div className="Nav-Buttons-One">
           <button onClick={this.canGoNext} type="button" className="Nav-btn">
             NEXT
           </button>
