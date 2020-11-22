@@ -117,7 +117,7 @@ class App extends Component {
 
       var origin = [];
       const location = this.state.responses[0];
-      origin.push(''.concat(location.address, ' ', location.city, ' ', location.stateName, ' ', location.zip));
+      origin.push(location);
       var distanceService = new window.google.maps.DistanceMatrixService();
       distanceService.getDistanceMatrix(
         {
