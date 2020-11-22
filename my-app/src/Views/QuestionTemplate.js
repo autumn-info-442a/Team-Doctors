@@ -7,6 +7,7 @@ class QuestionTemplate extends Component {
       checked: ""
     };
     this.handleCheck = this.handleCheck.bind(this);
+    this.canGoNext = this.canGoNext.bind(this);
   }
 
   handleCheck = (event) => {
@@ -15,8 +16,15 @@ class QuestionTemplate extends Component {
     });
   }
 
+  canGoNext() {
+    if (this.state.checked === "") {
+      alert("Please make a selection");
+    } else {
+      this.props.goNext(this.state.checked);
+    } 
+  }
+
   render() {
-    console.log(this.state);
     return (
         <div className="Question-page">
           <div className="Question">
@@ -52,7 +60,7 @@ class QuestionTemplate extends Component {
             <button onClick={this.props.goBack} type="button" className="Nav-btn">
               BACK
             </button>
-            <button onClick={this.props.goNext} type="button" className="Nav-btn">
+            <button onClick={this.canGoNext} type="button" className="Nav-btn">
               NEXT
             </button>
           </div>
