@@ -96,9 +96,9 @@ class App extends Component {
         alert("Error retrieving testing centers, please try again later");
       }
 
-      var driveThrough = this.state.responses[0] === "Yes" ? true : false;
-      var insurance = this.state.responses[1] === "Yes" ? true : false;
-      var translator = this.state.responses[2] === "Yes" ? true : false;
+      var driveThrough = this.state.responses[1] === "Yes" ? true : false;
+      var insurance = this.state.responses[2] === "Yes" ? true : false;
+      var translator = this.state.responses[3] === "Yes" ? true : false;
 
       // filter by criteria
       var filteredTestingCenters = driveThrough === false ? testingCenters : testingCenters.filter(tc => tc.driveThrough === true);
