@@ -57,7 +57,7 @@ class LocationQuestion extends Component {
   }
 
   checkValidLocation(address) {
-   /* var geocoder = new window.google.maps.Geocoder();
+    var geocoder = new window.google.maps.Geocoder();
     return new Promise(function(resolve, reject) {
       geocoder.geocode({
         'address': address
@@ -69,8 +69,7 @@ class LocationQuestion extends Component {
           alert("Invalid Address");
         }
       });
-    });*/
-    return true;
+    });
   }
 
   render() {

@@ -45,7 +45,7 @@ class App extends Component {
             responsesList.push("No response");
         })
     });   
-    this.setState({questions: questionsList, responses: responsesList});
+    this.setState({questions: questionsList, responses: responsesList, ready: questionsList.length > 0});
   }
 
   async getTestingCenters() {
@@ -152,14 +152,14 @@ class App extends Component {
     console.log(this.state);
 
     return (
-      (this.state.questions !== undefined && this.state.responses !== undefined)  === true ? <div className="App">
+      <div className="App">
           {pageIndex === 0 ? <LandingPage startSurvey={this.startSurvey}></LandingPage> : null}
           {pageIndex === 1 ? <LocationQuestion goNext={this.goNext} getCurrentResponse={this.getCurrentResponse}></LocationQuestion> : null}
-          {pageIndex === 2 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Do you have insurance?"} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate> : null}
+          {pageIndex === 2 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Would you like to use insurance?"} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate> : null}
           {pageIndex === 3 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Do you want a drive-through testing option?"} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate> : null}
           {pageIndex === 4 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Would you like a translator available to you?"} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate> : null}
           {pageIndex === 5 ? <ResultsPage computeResults={this.computeResults} results={this.state.results}></ResultsPage> : null}
-      </div> : <div><Loading></Loading></div>
+      </div>
     );
   }
 }
