@@ -16,7 +16,7 @@ class App extends Component {
         responses: [],
         pageIndex: 0,
         testingCenters: [],
-        results: []
+        results: [],
     }
 
     this.getSurveyQuestions = this.getSurveyQuestions.bind(this);
@@ -25,16 +25,15 @@ class App extends Component {
     this.startSurvey = this.startSurvey.bind(this);
     this.goNext = this.goNext.bind(this);
     this.goBack = this.goBack.bind(this);
-    this.getSurveyResponse = this.getSurveyResponse.bind(this);
     this.computeResults = this.computeResults.bind(this);
   }
   
   async componentWillMount() {
-      this.getSurveyQuestions();
-      this.getTestingCenters();
+      await this.getSurveyQuestions();
+      await this.getTestingCenters();
   }
 
-  getSurveyQuestions() {
+ async getSurveyQuestions() {
     var surveyQuestionRef = db.ref("surveyQuestions");
     var questionsList = [];
     var responsesList = [];
@@ -45,7 +44,7 @@ class App extends Component {
             responsesList.push("No response");
         })
     });   
-    this.setState({questions: questionsList, responses: responsesList, ready: questionsList.length > 0});
+    this.setState({questions: questionsList, responses: responsesList});
   }
 
   async getTestingCenters() {
@@ -83,10 +82,6 @@ class App extends Component {
 
   goBack() {
       this.setState({pageIndex: this.state.pageIndex - 1});
-  }
-
-  getSurveyResponse(pageIndex) {
-      return this.state.questions[this.getCurrentQuestion()].response;
   }
 
   async computeResults() {
@@ -148,16 +143,23 @@ class App extends Component {
   }
 
   render() {
-    const pageIndex = this.state.pageIndex;
-    console.log(this.state);
+    const { pageIndex, questions } = this.state;
+    var questionTemplates = [];
+
+    for (var i = 1; i < questions.length; i++) {
+      console.log(questions[i].question);
+      questionTemplates.push(
+        <QuestionTemplate key={i} goNext={this.goNext} goBack={this.goBack} questionText={questions[i].question} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate>
+      );
+    }
 
     return (
       <div className="App">
           {pageIndex === 0 ? <LandingPage startSurvey={this.startSurvey}></LandingPage> : null}
           {pageIndex === 1 ? <LocationQuestion goNext={this.goNext} getCurrentResponse={this.getCurrentResponse}></LocationQuestion> : null}
-          {pageIndex === 2 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Would you like to use insurance?"} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate> : null}
-          {pageIndex === 3 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Do you want a drive-through testing option?"} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate> : null}
-          {pageIndex === 4 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Would you like a translator available to you?"} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate> : null}
+          {pageIndex === 2 ? questionTemplates[0] : null}
+          {pageIndex === 3 ? questionTemplates[1] : null}
+          {pageIndex === 4 ? questionTemplates[2] : null}
           {pageIndex === 5 ? <ResultsPage computeResults={this.computeResults} results={this.state.results}></ResultsPage> : null}
       </div>
     );

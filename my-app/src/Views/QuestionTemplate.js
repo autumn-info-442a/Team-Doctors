@@ -22,7 +22,7 @@ class QuestionTemplate extends Component {
   }
 
   canGoNext() {
-    if (this.state.checked === "") {
+    if (this.state.checked !== "Yes" && this.state.checked !== "No") {
       alert("Please make a selection");
     } else {
       this.props.goNext(this.state.checked);

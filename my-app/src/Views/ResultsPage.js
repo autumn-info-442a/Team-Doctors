@@ -1,21 +1,30 @@
 import { render } from '@testing-library/react';
 import React, {Component} from 'react';
+import Loading from './Loading';
 
 class ResultsPage extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loading: true
+    };
+  }
+
+  componentWillMount() {
+    this.props.computeResults();
   }
 
   componentDidMount() {
-    this.props.computeResults();
+    this.setState({loading: false});
   }
 
   render() {
       const results = this.props.results;
+      const loading = this.props.loading;
       var resultsDisplay = [];
       for (var i = 0; i < results.length; i++) {
         resultsDisplay.push(
-          <div id={i} className="Result-section-flexbox">
+          <div key={i} className="Result-section-flexbox">
             <div className="Single-result-flexbox">
                 <div className="Result-card">
                     <p className="Testing-center">{results[i].name}</p>
@@ -40,7 +49,7 @@ class ResultsPage extends Component {
       }
 
       return (
-        <div>
+        this.props.results.length > 0 ? <div>
             <div>
                 <p className="Result-intro">Here are the testing centers you should go to based on your selections:</p>
                 <p className="Result-explanation">They are filtered based on your preferences and ordered based on closest location.</p>
@@ -48,7 +57,7 @@ class ResultsPage extends Component {
             <div>
               {resultsDisplay}
             </div>
-        </div>
+        </div> : <Loading></Loading>
       );
   }
 }

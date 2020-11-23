@@ -70,6 +70,7 @@ class LocationQuestion extends Component {
         }
       });
     });
+    return true;
   }
 
   render() {
