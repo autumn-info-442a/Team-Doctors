@@ -10,6 +10,11 @@ class QuestionTemplate extends Component {
     this.canGoNext = this.canGoNext.bind(this);
   }
 
+  componentWillMount() {
+    var currentResponse = this.props.getCurrentResponse();
+    this.setState({checked: currentResponse});
+  }
+
   handleCheck = (event) => {
     this.setState({
       checked: event.target.value
