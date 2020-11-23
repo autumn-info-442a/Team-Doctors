@@ -15,6 +15,13 @@ class LocationQuestion extends Component {
     this.checkValidLocation = this.checkValidLocation.bind(this);
   }
 
+  componentWillMount() {
+    var currentResponse = this.props.getCurrentResponse();
+    if (currentResponse.length !== null) {
+      this.setState({address: currentResponse.address, city: currentResponse.city, stateName: currentResponse.stateName, zip: currentResponse.zip});
+    }
+  }
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -63,6 +70,7 @@ class LocationQuestion extends Component {
         }
       });
     });
+    return true;
   }
 
   render() {

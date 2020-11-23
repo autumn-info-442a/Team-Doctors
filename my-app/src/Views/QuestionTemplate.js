@@ -10,6 +10,11 @@ class QuestionTemplate extends Component {
     this.canGoNext = this.canGoNext.bind(this);
   }
 
+  componentWillMount() {
+    var currentResponse = this.props.getCurrentResponse();
+    this.setState({checked: currentResponse});
+  }
+
   handleCheck = (event) => {
     this.setState({
       checked: event.target.value
@@ -17,7 +22,7 @@ class QuestionTemplate extends Component {
   }
 
   canGoNext() {
-    if (this.state.checked === "") {
+    if (this.state.checked !== "Yes" && this.state.checked !== "No") {
       alert("Please make a selection");
     } else {
       this.props.goNext(this.state.checked);

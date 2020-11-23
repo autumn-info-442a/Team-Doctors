@@ -6,6 +6,7 @@ import LandingPage from './Views/LandingPage';
 import LocationQuestion from './Views/LocationQuestion';
 import QuestionTemplate from './Views/QuestionTemplate';
 import ResultsPage from './Views/ResultsPage';
+import Loading from './Views/Loading';
 
 class App extends Component {
   constructor(props) {
@@ -15,25 +16,24 @@ class App extends Component {
         responses: [],
         pageIndex: 0,
         testingCenters: [],
-        results: []
+        results: [],
     }
 
     this.getSurveyQuestions = this.getSurveyQuestions.bind(this);
     this.getTestingCenters = this.getTestingCenters.bind(this);
-    this.getCurrentQuestion = this.getCurrentQuestion.bind(this);
+    this.getCurrentResponse = this.getCurrentResponse.bind(this);
     this.startSurvey = this.startSurvey.bind(this);
     this.goNext = this.goNext.bind(this);
     this.goBack = this.goBack.bind(this);
-    this.getSurveyResponse = this.getSurveyResponse.bind(this);
     this.computeResults = this.computeResults.bind(this);
   }
   
   async componentWillMount() {
-      this.getSurveyQuestions();
-      this.getTestingCenters();
+      await this.getSurveyQuestions();
+      await this.getTestingCenters();
   }
 
-  getSurveyQuestions() {
+ async getSurveyQuestions() {
     var surveyQuestionRef = db.ref("surveyQuestions");
     var questionsList = [];
     var responsesList = [];
@@ -59,8 +59,8 @@ class App extends Component {
     this.setState({testingCenters: testingCentersList});
 }
 
-  getCurrentQuestion() {
-    return this.state.pageIndex - 1;
+  getCurrentResponse() {
+    return this.state.responses[this.state.pageIndex - 1];
   }
 
   startSurvey() {
@@ -70,7 +70,7 @@ class App extends Component {
   goNext = (response) => {
     if (response != null) {
         var updateResponses = this.state.responses;
-        updateResponses[this.getCurrentQuestion()] = response;
+        updateResponses[this.state.pageIndex - 1] = response;
         this.setState({
             responses: updateResponses,
         });
@@ -83,11 +83,6 @@ class App extends Component {
   goBack() {
       this.setState({pageIndex: this.state.pageIndex - 1});
   }
-
-  getSurveyResponse(pageIndex) {
-      return this.state.questions[this.getCurrentQuestion()].response;
-  }
-
 
   async computeResults() {
       var testingCenters = this.state.testingCenters;
@@ -116,6 +111,7 @@ class App extends Component {
       filteredTestingCenters.forEach(tc => {
           addresses.push(tc.address);
       });
+
       var distanceService = new window.google.maps.DistanceMatrixService();
       distanceService.getDistanceMatrix(
         {
@@ -147,19 +143,25 @@ class App extends Component {
   }
 
   render() {
-    const pageIndex = this.state.pageIndex;
-    const questions = this.state.questions;
-    const responses = this.state.responses;
-    console.log(this.state);
+    const { pageIndex, questions } = this.state;
+    var questionTemplates = [];
+
+    for (var i = 1; i < questions.length; i++) {
+      console.log(questions[i].question);
+      questionTemplates.push(
+        <QuestionTemplate key={i} goNext={this.goNext} goBack={this.goBack} questionText={questions[i].question} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate>
+      );
+    }
+
     return (
-      (this.state.questions !== undefined && this.state.responses !== undefined)  === true ? <div className="App">
+      <div className="App">
           {pageIndex === 0 ? <LandingPage startSurvey={this.startSurvey}></LandingPage> : null}
-          {pageIndex === 1 ? <LocationQuestion goNext={this.goNext}></LocationQuestion> : null}
-          {pageIndex === 2 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Do you have insurance?"}></QuestionTemplate> : null}
-          {pageIndex === 3 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Do you want a drive-through testing option?"}></QuestionTemplate> : null}
-          {pageIndex === 4 ? <QuestionTemplate goNext={this.goNext} goBack={this.goBack} questionText={"Would you like a translator available to you?"}></QuestionTemplate> : null}
+          {pageIndex === 1 ? <LocationQuestion goNext={this.goNext} getCurrentResponse={this.getCurrentResponse}></LocationQuestion> : null}
+          {pageIndex === 2 ? questionTemplates[0] : null}
+          {pageIndex === 3 ? questionTemplates[1] : null}
+          {pageIndex === 4 ? questionTemplates[2] : null}
           {pageIndex === 5 ? <ResultsPage computeResults={this.computeResults} results={this.state.results}></ResultsPage> : null}
-      </div> : <div><h1>Loading...</h1></div>
+      </div>
     );
   }
 }
