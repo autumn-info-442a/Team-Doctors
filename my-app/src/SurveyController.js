@@ -14,21 +14,23 @@ class App extends Component {
         questions: [],
         responses: [],
         pageIndex: 0,
+        testingCenters: [],
         results: []
     }
 
     this.getSurveyQuestions = this.getSurveyQuestions.bind(this);
+    this.getTestingCenters = this.getTestingCenters.bind(this);
     this.getCurrentQuestion = this.getCurrentQuestion.bind(this);
     this.startSurvey = this.startSurvey.bind(this);
     this.goNext = this.goNext.bind(this);
     this.goBack = this.goBack.bind(this);
     this.getSurveyResponse = this.getSurveyResponse.bind(this);
-    this.getTestingCenters = this.getTestingCenters.bind(this);
     this.computeResults = this.computeResults.bind(this);
   }
   
   async componentWillMount() {
       this.getSurveyQuestions();
+      this.getTestingCenters();
   }
 
   getSurveyQuestions() {
@@ -45,6 +47,17 @@ class App extends Component {
     this.setState({questions: questionsList, responses: responsesList});
   }
 
+  async getTestingCenters() {
+    var testingCentersList = [];
+    var testingSitesRef = db.ref("testingSites");
+    testingSitesRef.on('value', function(snapshot) {
+        var data = snapshot.val();
+        data.forEach(testingCenter => {
+            testingCentersList.push(testingCenter);
+        })
+    });
+    this.setState({testingCenters: testingCentersList});
+}
 
   getCurrentQuestion() {
     return this.state.pageIndex - 1;
@@ -75,29 +88,23 @@ class App extends Component {
       return this.state.questions[this.getCurrentQuestion()].response;
   }
 
-  async getTestingCenters() {
-      var testingCentersList = [];
-      var testingSitesRef = db.ref("testingSites");
-      testingSitesRef.on('value', function(snapshot) {
-          var data = snapshot.val();
-          data.forEach(testingCenter => {
-              testingCentersList.push(testingCenter);
-          })
-      });
-      return testingCentersList;
-  }
 
   async computeResults() {
-      var testingCenters = await this.getTestingCenters();
-
-      var driveThrough = this.state.responses[1] === "Yes";
-      var insurance = this.state.responses[2] === "Yes";
+      var testingCenters = this.state.testingCenters;
+      var insurance = this.state.responses[1] === "Yes";
+      var driveThrough = this.state.responses[2] === "Yes";
       var translator = this.state.responses[3] === "Yes";
 
+      if (testingCenters.length < 1) {
+          console.log("empty testing centers");
+      }
+
       // filter by criteria
-      var filteredTestingCenters = driveThrough === false ? testingCenters : testingCenters.filter(tc => tc.driveThrough === true);
-      filteredTestingCenters = insurance === false ? filteredTestingCenters : filteredTestingCenters.filter(tc => tc.insurance === true);
-      filteredTestingCenters = translator === false ? filteredTestingCenters : filteredTestingCenters.filter(tc => tc.translator === true);
+      var filteredTestingCenters = testingCenters.filter(tc => {
+        return ((tc.insurance === true && insurance === true) || (insurance === false))
+        && ((tc.driveThrough === true && driveThrough === true) || (driveThrough === false))
+        && ((tc.translator === true && translator === true) || (translator === false))
+      });
 
       // get survey address
       var origin = [];
@@ -109,7 +116,6 @@ class App extends Component {
       filteredTestingCenters.forEach(tc => {
           addresses.push(tc.address);
       });
-      console.log(addresses);
       var distanceService = new window.google.maps.DistanceMatrixService();
       distanceService.getDistanceMatrix(
         {
