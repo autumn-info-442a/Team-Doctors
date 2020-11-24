@@ -24,6 +24,7 @@ class App extends Component {
     this.getCurrentResponse = this.getCurrentResponse.bind(this);
     this.startSurvey = this.startSurvey.bind(this);
     this.goNext = this.goNext.bind(this);
+    this.saveResponse = this.saveResponse.bind(this);
     this.goBack = this.goBack.bind(this);
     this.computeResults = this.computeResults.bind(this);
   }
@@ -67,17 +68,18 @@ class App extends Component {
       this.setState({pageIndex: this.state.pageIndex + 1});
   }
 
-  goNext = (response) => {
-    if (response != null) {
-        var updateResponses = this.state.responses;
-        updateResponses[this.state.pageIndex - 1] = response;
-        this.setState({
-            responses: updateResponses,
-        });
-    }
+  goNext() {
     this.setState({
         pageIndex: this.state.pageIndex + 1
     });
+  }
+
+  saveResponse = (response) => {
+      var updateResponses = this.state.responses;
+      updateResponses[this.state.pageIndex - 1] = response;
+      this.setState({
+          responses: updateResponses,
+      });
   }
 
   goBack() {
@@ -95,13 +97,13 @@ class App extends Component {
       }
 
       testingCenters.forEach(tc =>{
-        var criteriaMetList = [];
+        var criteriaMetCount = 0;
         var criteriaAvailableList = [];
         var criteriaNotAvailableList = [];
         if ((tc.free=== true)) {
-          criteriaAvailableList.push("Free testing availabe");
+          criteriaAvailableList.push("Free testing available");
           if (free === true) {
-            criteriaMetList.push("free");
+            criteriaMetCount++;
           }
         } else {
           criteriaNotAvailableList.push("No free testing");
@@ -109,7 +111,7 @@ class App extends Component {
         if (tc.driveThrough === true) {
           criteriaAvailableList.push("Drive through option");
           if (driveThrough === true) {
-            criteriaMetList.push("driveThrough");
+            criteriaMetCount++;
           }
         } else {
           criteriaNotAvailableList.push("No drive through option");
@@ -117,13 +119,13 @@ class App extends Component {
         if (tc.translator === true) {
           criteriaAvailableList.push("Translator available");
           if (translator === true) {
-            criteriaMetList.push("translator");
+            criteriaMetCount++;
           }
         } else {
           criteriaNotAvailableList.push("No translator option");
         }
 
-        tc.criteriaMet = criteriaMetList;
+        tc.criteriaMet = criteriaMetCount;
         tc.criteriaAvailable = criteriaAvailableList;
         tc.criteriaNotAvailable = criteriaNotAvailableList;
       });
@@ -162,7 +164,7 @@ class App extends Component {
             }
             // sort by criteria met and then distance
             testingCenters.sort(function(a, b) {
-              return b.criteriaMet.length - a.criteriaMet.length || a.distanceAway - b.distanceAway;
+              return b.criteriaMet - a.criteriaMet || a.distanceAway - b.distanceAway;
             });
             console.log(testingCenters);
             this.setState({results: testingCenters});
@@ -177,14 +179,14 @@ class App extends Component {
 
     for (var i = 1; i < questions.length; i++) {
       questionTemplates.push(
-        <QuestionTemplate key={i} goNext={this.goNext} goBack={this.goBack} questionText={questions[i].question} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate>
+        <QuestionTemplate key={i} goNext={this.goNext} saveResponse={this.saveResponse} goBack={this.goBack} questionText={questions[i].question} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate>
       );
     }
 
     return (
       <div className="App">
           {pageIndex === 0 ? <LandingPage startSurvey={this.startSurvey}></LandingPage> : null}
-          {pageIndex === 1 ? <LocationQuestion goNext={this.goNext} getCurrentResponse={this.getCurrentResponse}></LocationQuestion> : null}
+          {pageIndex === 1 ? <LocationQuestion goNext={this.goNext} saveResponse={this.saveResponse} getCurrentResponse={this.getCurrentResponse}></LocationQuestion> : null}
           {pageIndex === 2 ? questionTemplates[0] : null}
           {pageIndex === 3 ? questionTemplates[1] : null}
           {pageIndex === 4 ? questionTemplates[2] : null}

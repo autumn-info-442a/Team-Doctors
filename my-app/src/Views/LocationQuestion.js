@@ -43,7 +43,8 @@ class LocationQuestion extends Component {
     if (fieldsFilledOut) {
       var validLocation = await this.checkValidLocation(address);
       if (validLocation) {
-        this.props.goNext(location);
+        this.props.saveResponse(location);
+        this.props.goNext();
       }
     } else {
         alert("Fill out all fields");
