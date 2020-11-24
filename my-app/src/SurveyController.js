@@ -24,6 +24,7 @@ class App extends Component {
     this.getCurrentResponse = this.getCurrentResponse.bind(this);
     this.startSurvey = this.startSurvey.bind(this);
     this.goNext = this.goNext.bind(this);
+    this.saveResponse = this.saveResponse.bind(this);
     this.goBack = this.goBack.bind(this);
     this.computeResults = this.computeResults.bind(this);
   }
@@ -57,7 +58,7 @@ class App extends Component {
         })
     });
     this.setState({testingCenters: testingCentersList});
-}
+  }
 
   getCurrentResponse() {
     return this.state.responses[this.state.pageIndex - 1];
@@ -67,17 +68,18 @@ class App extends Component {
       this.setState({pageIndex: this.state.pageIndex + 1});
   }
 
-  goNext = (response) => {
-    if (response != null) {
-        var updateResponses = this.state.responses;
-        updateResponses[this.state.pageIndex - 1] = response;
-        this.setState({
-            responses: updateResponses,
-        });
-    }
+  goNext() {
     this.setState({
         pageIndex: this.state.pageIndex + 1
     });
+  }
+
+  saveResponse = (response) => {
+      var updateResponses = this.state.responses;
+      updateResponses[this.state.pageIndex - 1] = response;
+      this.setState({
+          responses: updateResponses,
+      });
   }
 
   goBack() {
@@ -86,29 +88,56 @@ class App extends Component {
 
   async computeResults() {
       var testingCenters = this.state.testingCenters;
-      var insurance = this.state.responses[1] === "Yes";
+      var free = this.state.responses[1] === "Yes";
       var driveThrough = this.state.responses[2] === "Yes";
       var translator = this.state.responses[3] === "Yes";
 
       if (testingCenters.length < 1) {
-          console.log("empty testing centers");
+          console.log("Error retrieving testing centers");
       }
 
-      // filter by criteria
-      var filteredTestingCenters = testingCenters.filter(tc => {
-        return ((tc.insurance === true && insurance === true) || (insurance === false))
-        && ((tc.driveThrough === true && driveThrough === true) || (driveThrough === false))
-        && ((tc.translator === true && translator === true) || (translator === false))
+      testingCenters.forEach(tc =>{
+        var criteriaMetCount = 0;
+        var criteriaAvailableList = [];
+        var criteriaNotAvailableList = [];
+        if ((tc.free=== true)) {
+          criteriaAvailableList.push("Free testing available");
+          if (free === true) {
+            criteriaMetCount++;
+          }
+        } else {
+          criteriaNotAvailableList.push("No free testing");
+        }
+        if (tc.driveThrough === true) {
+          criteriaAvailableList.push("Drive through option");
+          if (driveThrough === true) {
+            criteriaMetCount++;
+          }
+        } else {
+          criteriaNotAvailableList.push("No drive through option");
+        }
+        if (tc.translator === true) {
+          criteriaAvailableList.push("Translator available");
+          if (translator === true) {
+            criteriaMetCount++;
+          }
+        } else {
+          criteriaNotAvailableList.push("No translator option");
+        }
+
+        tc.criteriaMet = criteriaMetCount;
+        tc.criteriaAvailable = criteriaAvailableList;
+        tc.criteriaNotAvailable = criteriaNotAvailableList;
       });
+
 
       // get survey address
       var origin = [];
       origin.push(''.concat(this.state.responses[0].address, ", ", this.state.responses[0].city, ", ", this.state.responses[0].stateName, " ", this.state.responses[0].zip));
-      console.log(origin);
 
       // get distance away from specificed location 
       var addresses = [];
-      filteredTestingCenters.forEach(tc => {
+      testingCenters.forEach(tc => {
           addresses.push(tc.address);
       });
 
@@ -131,12 +160,14 @@ class App extends Component {
                 var distance = element.distance.text;
                 var distanceArr = distance.split(" ");
                 var mileage = parseFloat(distanceArr[0]);
-                filteredTestingCenters[i].distanceAway = mileage;
+                testingCenters[i].distanceAway = mileage;
             }
-            // sort by distance
-            filteredTestingCenters.sort((a, b) => (a.distanceAway > b.distanceAway) ? 1 : -1);
-            console.log(filteredTestingCenters);
-            this.setState({results: filteredTestingCenters});
+            // sort by criteria met and then distance
+            testingCenters.sort(function(a, b) {
+              return b.criteriaMet - a.criteriaMet || a.distanceAway - b.distanceAway;
+            });
+            console.log(testingCenters);
+            this.setState({results: testingCenters});
           }
         }.bind(this)
     )
@@ -147,16 +178,15 @@ class App extends Component {
     var questionTemplates = [];
 
     for (var i = 1; i < questions.length; i++) {
-      console.log(questions[i].question);
       questionTemplates.push(
-        <QuestionTemplate key={i} goNext={this.goNext} goBack={this.goBack} questionText={questions[i].question} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate>
+        <QuestionTemplate key={i} goNext={this.goNext} saveResponse={this.saveResponse} goBack={this.goBack} questionText={questions[i].question} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate>
       );
     }
 
     return (
       <div className="App">
           {pageIndex === 0 ? <LandingPage startSurvey={this.startSurvey}></LandingPage> : null}
-          {pageIndex === 1 ? <LocationQuestion goNext={this.goNext} getCurrentResponse={this.getCurrentResponse}></LocationQuestion> : null}
+          {pageIndex === 1 ? <LocationQuestion goNext={this.goNext} saveResponse={this.saveResponse} getCurrentResponse={this.getCurrentResponse}></LocationQuestion> : null}
           {pageIndex === 2 ? questionTemplates[0] : null}
           {pageIndex === 3 ? questionTemplates[1] : null}
           {pageIndex === 4 ? questionTemplates[2] : null}

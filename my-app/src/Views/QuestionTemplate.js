@@ -19,13 +19,15 @@ class QuestionTemplate extends Component {
     this.setState({
       checked: event.target.value
     });
+    this.props.saveResponse(event.target.value);
   }
 
   canGoNext() {
     if (this.state.checked !== "Yes" && this.state.checked !== "No") {
       alert("Please make a selection");
     } else {
-      this.props.goNext(this.state.checked);
+      this.props.saveResponse(this.state.checked);
+      this.props.goNext();
     } 
   }
 

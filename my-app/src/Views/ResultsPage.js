@@ -21,13 +21,27 @@ class ResultsPage extends Component {
   render() {
       const results = this.props.results;
       const loading = this.props.loading;
+
+      // get results to display
       var resultsDisplay = [];
       for (var i = 0; i < results.length; i++) {
+        var criteriaDisplay = [];
+        for (var c in results[i].criteriaAvailable) {
+          criteriaDisplay.push(
+          <p className="Criteria"><span className="Checkmark">&#10003;</span>{results[i].criteriaAvailable[c]}</p>
+          );
+        }
+        for (var c in results[i].criteriaNotAvailable) {
+          criteriaDisplay.push(
+            <p className="Criteria"><span className="x-mark"></span>{results[i].criteriaNotAvailable[c]}</p>
+          );
+        }
+
         resultsDisplay.push(
           <div key={i} className="Result-section-flexbox">
             <div className="Single-result-flexbox">
                 <div className="Result-card">
-                    <p className="Testing-center">{results[i].name}</p>
+                    <p className="Testing-center"><a href={results[i].websiteUrl}>{results[i].name}</a></p>
                     <p className="Testing-center-address">{results[i].address}</p>
                     <p className="Testing-center-hours">Open: Mon-Fri</p>
                     <div className="Card-bottom">
@@ -40,8 +54,7 @@ class ResultsPage extends Component {
                     </div>
                 </div>
                 <div className="Criteria-checklist">
-                    <p className="Criteria"><span className="Checkmark">&#10003;</span> Sample Criteria 1</p>
-                    <p className="Criteria"><span className="Checkmark">&#10003;</span> Sample Criteria 2</p>
+                    {criteriaDisplay}
                 </div>
             </div>
           </div>
