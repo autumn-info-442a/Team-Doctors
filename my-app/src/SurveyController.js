@@ -93,31 +93,39 @@ class App extends Component {
       if (testingCenters.length < 1) {
           console.log("Error retrieving testing centers");
       }
-      
+
       testingCenters.forEach(tc =>{
         var criteriaMetList = [];
         var criteriaAvailableList = [];
+        var criteriaNotAvailableList = [];
         if ((tc.free=== true)) {
-          criteriaAvailableList.push("free");
+          criteriaAvailableList.push("Free testing availabe");
           if (free === true) {
             criteriaMetList.push("free");
           }
+        } else {
+          criteriaNotAvailableList.push("No free testing");
         }
         if (tc.driveThrough === true) {
-          criteriaAvailableList.push("driveThrough");
+          criteriaAvailableList.push("Drive through option");
           if (driveThrough === true) {
             criteriaMetList.push("driveThrough");
           }
+        } else {
+          criteriaNotAvailableList.push("No drive through option");
         }
         if (tc.translator === true) {
-          criteriaAvailableList.push("translator");
+          criteriaAvailableList.push("Translator available");
           if (translator === true) {
             criteriaMetList.push("translator");
           }
+        } else {
+          criteriaNotAvailableList.push("No translator option");
         }
 
         tc.criteriaMet = criteriaMetList;
         tc.criteriaAvailable = criteriaAvailableList;
+        tc.criteriaNotAvailable = criteriaNotAvailableList;
       });
 
 
