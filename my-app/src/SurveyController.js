@@ -93,14 +93,7 @@ class App extends Component {
       if (testingCenters.length < 1) {
           console.log("Error retrieving testing centers");
       }
-
-      // filter by criteria
-      /*var filteredTestingCenters = testingCenters.filter(tc => {
-        return ((tc.insurance === true && insurance === true) || (insurance === false))
-        && ((tc.driveThrough === true && driveThrough === true) || (driveThrough === false))
-        && ((tc.translator === true && translator === true) || (translator === false))
-      });*/
-
+      
       testingCenters.forEach(tc =>{
         var criteriaMetList = [];
         var criteriaAvailableList = [];
