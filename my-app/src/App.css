@@ -184,6 +184,8 @@ h1 {
 
 .Criteria-checklist {
   font-size: 24px;
+  text-align: left;
+  margin-left: 1rem;
 }
 
 .Criteria {
@@ -194,12 +196,50 @@ h1 {
   color: #197278;
 }
 
+.x-mark {
+  color: #c44536;
+}
+
 .Error-message {
   font-size: 50px;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+button:hover {
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(40, 61, 59, 0.75)
+}
+
+.Box:hover {
+  cursor: pointer;
+}
+
+a:hover {
+  color: #197278;
+}
+
+.Loading-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #283D3B; /* Blue */
+  border-radius: 50%;
+  width: 20rem;
+  height: 20rem;
+  animation: spin 2s linear infinite;
+  margin-top: 2rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 @keyframes App-logo-spin {

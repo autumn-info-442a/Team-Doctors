@@ -28,12 +28,12 @@ class ResultsPage extends Component {
         var criteriaDisplay = [];
         for (var c in results[i].criteriaAvailable) {
           criteriaDisplay.push(
-          <p className="Criteria"><span className="Checkmark">&#10003;</span>{results[i].criteriaAvailable[c]}</p>
+          <p className="Criteria"><span className="Checkmark">&#10003; </span>{results[i].criteriaAvailable[c]}</p>
           );
         }
         for (var c in results[i].criteriaNotAvailable) {
           criteriaDisplay.push(
-            <p className="Criteria"><span className="x-mark"></span>{results[i].criteriaNotAvailable[c]}</p>
+            <p className="Criteria"><span className="x-mark">&#10007; </span>{results[i].criteriaNotAvailable[c]}</p>
           );
         }
 
