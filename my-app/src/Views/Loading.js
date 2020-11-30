@@ -7,8 +7,9 @@ class Loading extends Component {
 
   render() {
     return (
-      <div>
+      <div className="Loading-page">
         <p className="Error-message">Please wait a moment while we retrieve your results.</p>
+        <div class="loader"></div>
       </div>
     );
     }
