@@ -217,6 +217,10 @@ button:hover {
   cursor: pointer;
 }
 
+a:hover {
+  color: #197278;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
