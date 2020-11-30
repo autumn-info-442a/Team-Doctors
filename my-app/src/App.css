@@ -184,6 +184,8 @@ h1 {
 
 .Criteria-checklist {
   font-size: 24px;
+  text-align: left;
+  margin-left: 1rem;
 }
 
 .Criteria {
@@ -194,12 +196,25 @@ h1 {
   color: #197278;
 }
 
+.x-mark {
+  color: #c44536;
+}
+
 .Error-message {
   font-size: 50px;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+button:hover {
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(40, 61, 59, 0.75)
+}
+
+.Box:hover {
+  cursor: pointer;
 }
 
 @keyframes App-logo-spin {
