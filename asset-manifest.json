@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Team-Doctors/static/css/main.24430640.chunk.css",
-    "main.js": "/Team-Doctors/static/js/main.7acae5db.chunk.js",
-    "main.js.map": "/Team-Doctors/static/js/main.7acae5db.chunk.js.map",
+    "main.js": "/Team-Doctors/static/js/main.cda411c5.chunk.js",
+    "main.js.map": "/Team-Doctors/static/js/main.cda411c5.chunk.js.map",
     "runtime-main.js": "/Team-Doctors/static/js/runtime-main.36f3b97a.js",
     "runtime-main.js.map": "/Team-Doctors/static/js/runtime-main.36f3b97a.js.map",
     "static/js/2.f345e230.chunk.js": "/Team-Doctors/static/js/2.f345e230.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.36f3b97a.js",
     "static/js/2.f345e230.chunk.js",
     "static/css/main.24430640.chunk.css",
-    "static/js/main.7acae5db.chunk.js"
+    "static/js/main.cda411c5.chunk.js"
   ]
 }
