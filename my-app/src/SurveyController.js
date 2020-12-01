@@ -17,6 +17,7 @@ class App extends Component {
         pageIndex: 0,
         testingCenters: [],
         results: [],
+        lastUpdated: ""
     }
 
     this.getSurveyQuestions = this.getSurveyQuestions.bind(this);
@@ -27,11 +28,22 @@ class App extends Component {
     this.saveResponse = this.saveResponse.bind(this);
     this.goBack = this.goBack.bind(this);
     this.computeResults = this.computeResults.bind(this);
+    this.lastUpdated = this.getLastUpdated.bind(this);
   }
   
   async componentWillMount() {
       await this.getSurveyQuestions();
       await this.getTestingCenters();
+      await this.getLastUpdated();
+  }
+
+  async getLastUpdated() {
+    var lastUpdatedRef = db.ref("lastUpdated");
+    var dateUpdated = "";
+    lastUpdatedRef.on('value', function(snapshot) {
+      dateUpdated = snapshot.val()[0].lastUpdated;
+    });   
+    this.setState({lastUpdated: dateUpdated});
   }
 
  async getSurveyQuestions() {
@@ -190,7 +202,7 @@ class App extends Component {
           {pageIndex === 2 ? questionTemplates[0] : null}
           {pageIndex === 3 ? questionTemplates[1] : null}
           {pageIndex === 4 ? questionTemplates[2] : null}
-          {pageIndex === 5 ? <ResultsPage computeResults={this.computeResults} results={this.state.results}></ResultsPage> : null}
+          {pageIndex === 5 ? <ResultsPage computeResults={this.computeResults} results={this.state.results} lastUpdated={this.state.lastUpdated}></ResultsPage> : null}
       </div>
     );
   }
