@@ -5,22 +5,15 @@ import Loading from './Loading';
 class ResultsPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loading: true
-    };
   }
 
   componentWillMount() {
     this.props.computeResults();
   }
 
-  componentDidMount() {
-    this.setState({loading: false});
-  }
-
   render() {
       const results = this.props.results;
-      const loading = this.props.loading;
+      const lastUpdated = this.props.lastUpdated;
 
       // get results to display
       var resultsDisplay = [];
@@ -62,7 +55,7 @@ class ResultsPage extends Component {
       }
 
       return (
-        this.props.results.length > 0 ? <div>
+        this.props.results.length > 0 && this.props.lastUpdated.length > 0 ? <div>
             <div>
                 <p className="Result-intro">Here are the testing centers you should go to based on your selections:</p>
                 <p className="Result-explanation">They are filtered based on your preferences and ordered based on closest location.</p>

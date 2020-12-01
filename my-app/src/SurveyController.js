@@ -28,7 +28,7 @@ class App extends Component {
     this.saveResponse = this.saveResponse.bind(this);
     this.goBack = this.goBack.bind(this);
     this.computeResults = this.computeResults.bind(this);
-    this.lastUpdated = this.getLastUpdated.bind(this);
+    this.getLastUpdated = this.getLastUpdated.bind(this);
   }
   
   async componentWillMount() {
@@ -38,11 +38,11 @@ class App extends Component {
   }
 
   async getLastUpdated() {
-    var lastUpdatedRef = db.ref("lastUpdated");
     var dateUpdated = "";
+    var lastUpdatedRef = db.ref("lastUpdated");
     lastUpdatedRef.on('value', function(snapshot) {
       dateUpdated = snapshot.val()[0].lastUpdated;
-    });   
+    });
     this.setState({lastUpdated: dateUpdated});
   }
 
@@ -186,6 +186,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state);
     const { pageIndex, questions } = this.state;
     var questionTemplates = [];
 
