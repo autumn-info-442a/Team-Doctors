@@ -251,3 +251,16 @@ a:hover {
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 760px) {
+  h1 {
+    font-size: 50px;
+  }
+
+  .loader {
+    width: 10rem;
+  height: 10rem;
+  }
+}
+
+
