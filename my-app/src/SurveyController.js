@@ -17,7 +17,7 @@ class App extends Component {
         pageIndex: 0,
         testingCenters: [],
         results: [],
-        lastUpdated: ""
+        lastUpdated: []
     }
 
     this.getSurveyQuestions = this.getSurveyQuestions.bind(this);
@@ -38,10 +38,13 @@ class App extends Component {
   }
 
   async getLastUpdated() {
-    var dateUpdated = "";
+    var dateUpdated = [];
     var lastUpdatedRef = db.ref("lastUpdated");
     lastUpdatedRef.on('value', function(snapshot) {
-      dateUpdated = snapshot.val()[0].lastUpdated;
+      var data = snapshot.val();
+      data.forEach(date => {
+        dateUpdated.push(date.lastUpdated);
+      });
     });
     this.setState({lastUpdated: dateUpdated});
   }

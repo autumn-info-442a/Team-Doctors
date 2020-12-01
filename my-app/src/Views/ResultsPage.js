@@ -59,7 +59,7 @@ class ResultsPage extends Component {
             <div>
                 <p className="Result-intro">Here are the testing centers you should go to based on your selections:</p>
                 <p className="Result-explanation">They are filtered based on your preferences and ordered based on closest location.</p>
-                <p className="Result-explanation">Testing center information last updated on: {this.props.lastUpdated}</p>
+                <p className="Result-explanation">Testing center information last updated on: {this.props.lastUpdated[0]}</p>
             </div>
             <div>
               {resultsDisplay}
