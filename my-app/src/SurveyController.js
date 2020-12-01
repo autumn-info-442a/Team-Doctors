@@ -189,7 +189,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state);
     const { pageIndex, questions } = this.state;
     var questionTemplates = [];
 
