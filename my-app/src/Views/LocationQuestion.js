@@ -81,26 +81,26 @@ class LocationQuestion extends Component {
           <p className="Q">
             Please enter a location.<span className="required">*</span>
           </p>
-        </div>
-        <div className="Location-form">
-            <form className="Full-address">
-                <div className="Address-field">
-                    <input onChange={this.handleChange} type="text" id="Address" name="address" value={ this.state.address }></input>
-                    <label for="Address">Address</label>
-                </div>
-                <div className="City-field">
-                    <input onChange={this.handleChange} type="text" id="City" name="city" value={ this.state.city }></input>
-                    <label for="City">City</label>
-                </div>
-                <div className="State-field">
-                    <input onChange={this.handleChange} type="text" id="State" name="stateName" value={ this.state.stateName }></input>
-                    <label for="State">State</label>
-                </div>
-                <div className="Zip-field">
-                    <input onChange={this.handleChange} type="text" id="Zip" name="zip" value={ this.state.zip }></input>
-                    <label for="Zip">Zip</label>
-                </div>
-            </form>
+          <div className="Location-form">
+              <form className="Full-address">
+                  <div className="Address-field">
+                      <input onChange={this.handleChange} type="text" id="Address" name="address" value={ this.state.address }></input>
+                      <label for="Address">Address</label>
+                  </div>
+                  <div className="City-field">
+                      <input onChange={this.handleChange} type="text" id="City" name="city" value={ this.state.city }></input>
+                      <label for="City">City</label>
+                  </div>
+                  <div className="State-field">
+                      <input onChange={this.handleChange} type="text" id="State" name="stateName" value={ this.state.stateName }></input>
+                      <label for="State">State</label>
+                  </div>
+                  <div className="Zip-field">
+                      <input onChange={this.handleChange} type="text" id="Zip" name="zip" value={ this.state.zip }></input>
+                      <label for="Zip">Zip</label>
+                  </div>
+              </form>
+          </div>
         </div>
         <div className="Nav-Buttons-One">
           <button onClick={this.canGoNext} type="button" className="Nav-btn">
