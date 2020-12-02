@@ -17,7 +17,7 @@ class LocationQuestion extends Component {
 
   componentWillMount() {
     var currentResponse = this.props.getCurrentResponse();
-    if (currentResponse.length !== null) {
+    if (currentResponse !== null || currentResponse.length !== 0) {
       this.setState({address: currentResponse.address, city: currentResponse.city, stateName: currentResponse.stateName, zip: currentResponse.zip});
     }
   }
@@ -53,7 +53,7 @@ class LocationQuestion extends Component {
 
   checkFields() {
     const {address, city, stateName, zip } = this.state;
-    var filledOut = (address.length > 0) && (city.length > 0) && (stateName.length > 0) && (zip.length > 0);
+    var filledOut = ((address !== undefined && address.length > 0) && (city !== undefined && city.length > 0) && (stateName !== undefined && stateName.length > 0) && (zip !== undefined && zip.length > 0));
     return filledOut;
   }
 
