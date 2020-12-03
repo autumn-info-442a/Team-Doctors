@@ -172,14 +172,14 @@ h1 {
 }
 
 .Testing-center {
-  font-size: 30px;
+  font-size: 32px;
   margin-top: .5rem;
   margin-bottom: .5rem;
   font-weight: bolder;
 }
 
 .Testing-center-address {
-  font-size: 25px;
+  font-size: 21px;
   margin-top: .5rem;
   margin-bottom: .5rem;
   font-weight: bold;
@@ -234,6 +234,10 @@ a {
   color: #283D3B;
 }
 
+a.black-link {
+  color: black;
+}
+
 button:hover {
   cursor: pointer;
   box-shadow: 0 10px 20px rgba(40, 61, 59, 0.75)
@@ -245,6 +249,10 @@ button:hover {
 
 a:hover {
   color: #197278;
+}
+
+a.black-link:hover {
+  color: #308085;
 }
 
 .Loading-page {
