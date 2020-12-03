@@ -47,13 +47,13 @@ class LocationQuestion extends Component {
         this.props.goNext();
       }
     } else {
-        alert("Fill out all fields");
+        alert("Please enter a valid address");
     }
   }
 
   checkFields() {
     const {address, city, stateName, zip } = this.state;
-    var filledOut = ((address !== undefined && address.length > 0) && (city !== undefined && city.length > 0) && (stateName !== undefined && stateName.length > 1) && (zip !== undefined && zip.length > 4));
+    var filledOut = ((address !== undefined && address.length > 0) && (city !== undefined && city.length > 0) && (stateName !== undefined && (stateName.toLowerCase() === "wa" || stateName.toLowerCase() === "washington")) && (zip !== undefined && zip.length > 4));
     return filledOut;
   }
 

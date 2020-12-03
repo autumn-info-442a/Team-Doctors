@@ -39,7 +39,7 @@ class ResultsPage extends Component {
                     <p className="Testing-center-hours">Open: Mon-Fri</p>
                     <div className="Card-bottom">
                         <div>
-                            <p className="Testing-phone">{results[i].phone}</p>
+                            <p className="Testing-phone"><a href={"tel:" + results[i].phone}>{results[i].phone}</a></p>
                         </div>
                         <div>
                             <p className="Testing-distance">{results[i].distanceAway + " mi"}</p>
