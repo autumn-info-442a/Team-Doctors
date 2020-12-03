@@ -53,7 +53,7 @@ class LocationQuestion extends Component {
 
   checkFields() {
     const {address, city, stateName, zip } = this.state;
-    var filledOut = ((address !== undefined && address.length > 0) && (city !== undefined && city.length > 0) && (stateName !== undefined && stateName.length > 0) && (zip !== undefined && zip.length > 0));
+    var filledOut = ((address !== undefined && address.length > 0) && (city !== undefined && city.length > 0) && (stateName !== undefined && stateName.length > 1) && (zip !== undefined && zip.length > 4));
     return filledOut;
   }
 

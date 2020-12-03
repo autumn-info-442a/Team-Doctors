@@ -7,6 +7,7 @@ import LocationQuestion from './Views/LocationQuestion';
 import QuestionTemplate from './Views/QuestionTemplate';
 import ResultsPage from './Views/ResultsPage';
 import Loading from './Views/Loading';
+import ErrorResults from './Views/ErrorResults';
 
 class App extends Component {
   constructor(props) {
@@ -15,9 +16,11 @@ class App extends Component {
         questions: [],
         responses: [],
         pageIndex: 0,
+        originAddress: "",
         testingCenters: [],
         results: [],
-        lastUpdated: []
+        lastUpdated: [],
+        resultsError: false
     }
 
     this.getSurveyQuestions = this.getSurveyQuestions.bind(this);
@@ -166,30 +169,36 @@ class App extends Component {
         },
         function (response, status) {
           if (status !== window.google.maps.DistanceMatrixStatus.OK) {
-              alert("Service error, please try again later");
               console.log("Error: ", status);
+              this.setState({resultsError: true});   
           } else {
             var results = response.rows[0].elements;
+            var originAddress = response.originAddresses[0];
+            console.log(originAddress);
             for (var i = 0; i < results.length; i++) {
                 var element = results[i];
-                var distance = element.distance.text;
-                var distanceArr = distance.split(" ");
-                var mileage = parseFloat(distanceArr[0]);
-                testingCenters[i].distanceAway = mileage;
+                if (element.distance == undefined) {
+                  this.setState({resultsError: true});
+                } else {
+                  var distance = element.distance.text;
+                  var distanceArr = distance.split(" ");
+                  var mileage = parseFloat(distanceArr[0]);
+                  testingCenters[i].distanceAway = mileage;
+                }
             }
             // sort by criteria met and then distance
             testingCenters.sort(function(a, b) {
               return b.criteriaMet - a.criteriaMet || a.distanceAway - b.distanceAway;
             });
             console.log(testingCenters);
-            this.setState({results: testingCenters});
+            this.setState({originAddress: originAddress, results: testingCenters});
           }
         }.bind(this)
-    )
+    );
   }
 
   render() {
-    const { pageIndex, questions } = this.state;
+    const { pageIndex, questions, resultsError } = this.state;
     var questionTemplates = [];
 
     for (var i = 1; i < questions.length; i++) {
@@ -199,13 +208,13 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
+      resultsError ? <ErrorResults></ErrorResults> : <div className="App">
           {pageIndex === 0 ? <LandingPage startSurvey={this.startSurvey}></LandingPage> : null}
           {pageIndex === 1 ? <LocationQuestion goNext={this.goNext} saveResponse={this.saveResponse} getCurrentResponse={this.getCurrentResponse}></LocationQuestion> : null}
           {pageIndex === 2 ? questionTemplates[0] : null}
           {pageIndex === 3 ? questionTemplates[1] : null}
           {pageIndex === 4 ? questionTemplates[2] : null}
-          {pageIndex === 5 ? <ResultsPage computeResults={this.computeResults} results={this.state.results} lastUpdated={this.state.lastUpdated}></ResultsPage> : null}
+          {pageIndex === 5 ? <ResultsPage computeResults={this.computeResults} originAddress = {this.state.originAddress} results={this.state.results} lastUpdated={this.state.lastUpdated}></ResultsPage> : null}
       </div>
     );
   }
