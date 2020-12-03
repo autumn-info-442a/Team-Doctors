@@ -58,20 +58,29 @@ class LocationQuestion extends Component {
   }
 
   checkValidLocation(address) {
-    var geocoder = new window.google.maps.Geocoder();
+    var origin = [];
+    origin.push(address);
+    var distanceService = new window.google.maps.DistanceMatrixService();
     return new Promise(function(resolve, reject) {
-      geocoder.geocode({
-        'address': address
-      }, function(results, status) {
-        if (status === window.google.maps.GeocoderStatus.OK && results.length > 0) {
-          resolve(true);
-        } else {
-          reject(false);
-          alert("Invalid Address");
+        distanceService.getDistanceMatrix(
+        {
+          origins: origin,
+          destinations: ["Seattle, WA, USA"],
+          travelMode: window.google.maps.TravelMode.DRIVING,
+          unitSystem: window.google.maps.UnitSystem.IMPERIAL 
+        },
+        function (response, status) {
+          var checkOrigin = response.originAddresses[0];
+          var containsCorrectResponse = checkOrigin.includes("WA");
+          if (status === window.google.maps.DistanceMatrixStatus.OK && containsCorrectResponse) {
+            resolve(true);
+          } else {
+            alert("Invalid Address");
+            reject(false);
+          }
         }
-      });
-    });
-    return true;
+      );
+    })
   }
 
   render() {
