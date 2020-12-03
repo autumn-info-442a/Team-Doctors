@@ -149,6 +149,10 @@ h1 {
   padding-right: 3rem;
 }
 
+.Result-address {
+  font-weight: bold;
+}
+
 .Result-section-flexbox {
   display: flex;
   flex-direction: column;
@@ -178,7 +182,6 @@ h1 {
   font-size: 25px;
   margin-top: .5rem;
   margin-bottom: .5rem;
-  color: #283D3B;
   font-weight: bold;
 }
 
@@ -227,6 +230,10 @@ h1 {
   color: #61dafb;
 }
 
+a {
+  color: #283D3B;
+}
+
 button:hover {
   cursor: pointer;
   box-shadow: 0 10px 20px rgba(40, 61, 59, 0.75)
@@ -244,6 +251,10 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.disclaimer {
+  font-size: 20px;
 }
 
 .loader {
