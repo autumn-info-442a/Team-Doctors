@@ -34,12 +34,12 @@ class ResultsPage extends Component {
           <div key={i} className="Result-section-flexbox">
             <div className="Single-result-flexbox">
                 <div className="Result-card">
-                    <p className="Testing-center"><a href={results[i].websiteUrl}>{results[i].name}</a></p>
-                    <p className="Testing-center-address">{results[i].address}</p>
+                    <p className="Testing-center"><a href={results[i].websiteUrl} target="_blank">{results[i].name}</a></p>
+                    <p className="Testing-center-address"><a href={"http://maps.google.com/?q=" + results[i].address} target="_blank">{results[i].address}</a></p>
                     <p className="Testing-center-hours">Open: Mon-Fri</p>
                     <div className="Card-bottom">
                         <div>
-                            <p className="Testing-phone"><a href={"tel:" + results[i].phone}>{results[i].phone}</a></p>
+                            <p className="Testing-phone"><a href={"tel:" + results[i].phone} target="_blank">{results[i].phone}</a></p>
                         </div>
                         <div>
                             <p className="Testing-distance">{results[i].distanceAway + " mi"}</p>

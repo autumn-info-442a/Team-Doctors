@@ -47,7 +47,7 @@ class LocationQuestion extends Component {
         this.props.goNext();
       }
     } else {
-        alert("Please enter a valid address");
+        alert("Please enter a valid address. Note: We currently only support Washington addresses.");
     }
   }
 
