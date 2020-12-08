@@ -85,7 +85,7 @@
 
 .Nav-btn {
   background-color: #197278;
-  width: 135px;
+  width: fit-content;
   height: 60px;
   border-radius: 15px;
   font-size: 40px;
