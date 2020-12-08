@@ -203,7 +203,7 @@ class App extends Component {
 
     for (var i = 1; i < questions.length; i++) {
       questionTemplates.push(
-        <QuestionTemplate key={i} goNext={this.goNext} saveResponse={this.saveResponse} goBack={this.goBack} questionText={questions[i].question} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate>
+        <QuestionTemplate key={i} lastQuestion={i === questions.length - 1} goNext={this.goNext} saveResponse={this.saveResponse} goBack={this.goBack} questionText={questions[i].question} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate>
       );
     }
 

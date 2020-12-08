@@ -36,7 +36,7 @@ class ResultsPage extends Component {
                 <div className="Result-card">
                     <p className="Testing-center"><a className="black-link" href={results[i].websiteUrl} target="_blank">{results[i].name}</a></p>
                     <p className="Testing-center-address"><a href={"http://maps.google.com/?q=" + results[i].address} target="_blank">{results[i].address}</a></p>
-                    <p className="Testing-center-hours">Open: Mon-Fri</p>
+                    <p className="Testing-center-hours">{results[i].hoursOfOperation}</p>
                     <div className="Card-bottom">
                         <div>
                             <p className="Testing-phone"><a href={"tel:" + results[i].phone} target="_blank">{results[i].phone}</a></p>
