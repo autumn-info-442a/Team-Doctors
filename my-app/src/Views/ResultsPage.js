@@ -58,7 +58,7 @@ class ResultsPage extends Component {
         this.props.results.length > 0 && this.props.lastUpdated.length > 0 ? <div>
             <div>
                 <p className="Result-intro">Here are the testing centers you should go to based on your selections:</p>
-                <p className="Result-explanation">They are filtered based on your preferences and ordered based on closest distance to: <span className="Result-address">{this.props.originAddress}</span>.</p>
+                <p className="Result-explanation">They are filtered based on your preferences and ordered based on closest distance to: <span className="Result-address">{this.props.originAddress}</span>. Please make sure this is the address you intended.</p>
                 <p className="Result-explanation last-updated">Testing center information last updated on: <span className="updated-date">{this.props.lastUpdated[0]}</span></p>
             </div>
             <div>
