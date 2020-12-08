@@ -64,6 +64,9 @@ class ResultsPage extends Component {
             <div>
               {resultsDisplay}
             </div>
+            <div>
+              <p className="end-note">Refresh the page to take the survey again.</p>
+            </div>
         </div> : <Loading></Loading>
       );
   }
