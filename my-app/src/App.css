@@ -46,7 +46,10 @@
 .Address-field, .State-field, .City-field, .Zip-field {
   margin-top: 2rem;
   margin-bottom: 2rem;
-  font-size: 30px;
+  font-size: 22px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
 }
 
 #Address, #City, #State, #Zip {
@@ -54,9 +57,13 @@
   border-radius: 25px;
   width: 75%;
   height: 50px;
-  margin-right: 1.5rem;
   font-size: 25px;
   padding-left: .75rem;
+  margin-right: 2rem;
+}
+
+label {
+  margin-left: 1rem;
 }
 
 .Checkboxes {
@@ -230,6 +237,7 @@ h1 {
 
 .Error-message {
   font-size: 50px;
+  padding-left: 2rem;
 }
 
 .App-link {
@@ -329,6 +337,11 @@ footer {
   .Nav-Buttons-One {
     margin-right: 1rem;
   }
+
+  footer {
+    position: relative;
+    flex-shrink: 0;
+  }
 }
 
 @media (max-width: 760px) {
@@ -363,7 +376,6 @@ footer {
   .Nav-Buttons-One {
     margin-right: 8rem;
   }
-
 }
 
 
