@@ -33,15 +33,18 @@
     ~~* *Ex. Once everything is filled out properly, you should see that the "NEXT" button is no longer greyed out*~~
 
 ### Yes/No Questions ###
-7. **COMPLETE :** Users should be able to click a Yes radio button
+7. **REVISED :** Users should be able to click a Yes radio button
     * *Check that the Yes button appears selected after clicking it*  
-    * *Check the current state to make sure that it has updated to reflect that Yes has been selected*
-8. **COMPLETE :** Users should be able to click a No radio button
+    * *Check the current state to make sure that it has updated to reflect that Yes has been selected*  
+    * * **REASONING FOR REVISION :** Originally, we had our requirement as saying "checkboxes" instead of radio buttons, but we changed it because radio buttons are a better design choice as they indicate you can only select one or the other.  
+8. **REVISED :** Users should be able to click a No radio button
     * *Make sure that the No button appears selected after clicking it*  
     * *Check the current state to make sure that it has updated to reflect that No has been selected*
-9. **COMPLETE :** When users select a Yes/No radio button, the other button will be automatically unselected
+    * * **REASONING FOR REVISION :** Originally, we had our requirement as saying "checkboxes" instead of radio buttons, but we changed it because radio buttons are a better design choice as they indicate you can only select one or the other.  
+9. **REVISED :** When users select a Yes/No radio button, the other button will be automatically unselected
     * *Make sure that only one button is selected when clicking back and forth between the two options*  
     * *Check the current state to make sure that it has updated to accurately reflect whichever button has been selected, and that the old/previous state has been cleared*  
+    * * **REASONING FOR REVISION :** Originally, we had our requirement as saying "checkboxes" instead of radio buttons, but we changed it because radio buttons are a better design choice as they indicate you can only select one or the other.  
 
 ### Proceeding/Going Back Through Survey Questions ###
 10. **REVISED :** Users should receive an indicator which survey questions are required to fill out before proceeding to the next question
