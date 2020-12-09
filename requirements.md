@@ -33,14 +33,14 @@
     ~~* *Ex. Once everything is filled out properly, you should see that the "NEXT" button is no longer greyed out*~~
 
 ### Yes/No Questions ###
-7. **COMPLETE :** Users should be able to click a Yes checkbox
-    * *Check that the Yes box appears checked after clicking it*  
+7. **COMPLETE :** Users should be able to click a Yes radio button
+    * *Check that the Yes button appears selected after clicking it*  
     * *Check the current state to make sure that it has updated to reflect that Yes has been selected*
-8. **COMPLETE :** Users should be able to click a No checkbox
-    * *Make sure that the No box appears checked after clicking it*  
+8. **COMPLETE :** Users should be able to click a No radio button
+    * *Make sure that the No button appears selected after clicking it*  
     * *Check the current state to make sure that it has updated to reflect that No has been selected*
-9. **COMPLETE :** When users select a Yes/No checkbox, the other checkbox will be automatically unselected
-    * *Make sure that only one box is checked when clicking back and forth between the two option*  
+9. **COMPLETE :** When users select a Yes/No radio button, the other button will be automatically unselected
+    * *Make sure that only one button is selected when clicking back and forth between the two options*  
     * *Check the current state to make sure that it has updated to accurately reflect whichever box has been selected, and that the old/previous state has been cleared*  
 
 ### Proceeding/Going Back Through Survey Questions ###
