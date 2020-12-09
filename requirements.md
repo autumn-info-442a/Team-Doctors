@@ -41,7 +41,7 @@
     * *Check the current state to make sure that it has updated to reflect that No has been selected*
 9. **COMPLETE :** When users select a Yes/No radio button, the other button will be automatically unselected
     * *Make sure that only one button is selected when clicking back and forth between the two options*  
-    * *Check the current state to make sure that it has updated to accurately reflect whichever box has been selected, and that the old/previous state has been cleared*  
+    * *Check the current state to make sure that it has updated to accurately reflect whichever button has been selected, and that the old/previous state has been cleared*  
 
 ### Proceeding/Going Back Through Survey Questions ###
 10. **REVISED :** Users should receive an indicator which survey questions are required to fill out before proceeding to the next question
@@ -60,7 +60,7 @@
       * *Ex. After entering the “Would you like free testing?” page, click on “BACK” and check to see if information filled out about the location is still there*
 13. **COMPLETE :** Users should be able to go back to the previous question at any time before submitting the survey
     * *Check that pressing the back button and making renders the previous survey question page*  
-      * *Ex. You finished answering the “Would you like a translator available for you” and you decide that you want to double check your answers so you click on the “BACK” button and can clearly see “Would you like free testing?” and the correct box checked* 
+      * *Ex. You finished answering the “Would you like a translator available for you” and you decide that you want to double check your answers so you click on the “BACK” button and can clearly see “Would you like free testing?” and the correct button checked* 
     * *Check that pressing back button updates the correct previous survey question in the application’s state*
       * *Ex. You’re on the page with the“Would you like a translator available for you” question and you decide that you want to go back to the previous question so you click on the “BACK” button and can clearly see the “Would you like free testing?” question*
 14. **COMPLETE :** Users should be able to edit any of their previous responses any time before submitting the survey
