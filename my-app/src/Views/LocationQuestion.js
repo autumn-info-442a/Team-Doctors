@@ -93,20 +93,20 @@ class LocationQuestion extends Component {
           <div className="Location-form">
               <form className="Full-address">
                   <div className="Address-field field">
+                      <label for="Address">ADDRESS</label>
                       <input onChange={this.handleChange} type="text" id="Address" name="address" value={ this.state.address }></input>
-                      <label for="Address">Address</label>
                   </div>
                   <div className="City-field field">
+                      <label for="City">CITY</label>
                       <input onChange={this.handleChange} type="text" id="City" name="city" value={ this.state.city }></input>
-                      <label for="City">City</label>
                   </div>
                   <div className="State-field field">
+                      <label for="State">STATE</label>
                       <input onChange={this.handleChange} type="text" id="State" name="stateName" value={ this.state.stateName }></input>
-                      <label for="State">State</label>
                   </div>
                   <div className="Zip-field field">
+                      <label for="Zip">ZIP</label>
                       <input onChange={this.handleChange} type="text" id="Zip" name="zip" value={ this.state.zip }></input>
-                      <label for="Zip">Zip</label>
                   </div>
               </form>
           </div>

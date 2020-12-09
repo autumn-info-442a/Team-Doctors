@@ -46,7 +46,8 @@
 .Address-field, .State-field, .City-field, .Zip-field {
   margin-top: 2rem;
   margin-bottom: 2rem;
-  font-size: 30px;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 #Address, #City, #State, #Zip {
@@ -54,9 +55,15 @@
   border-radius: 25px;
   width: 75%;
   height: 50px;
-  margin-left: 1.5rem;
+  /*margin-right: 1.5rem;*/
   font-size: 25px;
   padding-left: .75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-left: 1rem;
 }
 
 .Checkboxes {
