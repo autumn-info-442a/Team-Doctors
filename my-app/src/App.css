@@ -79,24 +79,28 @@
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 6rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: 6rem;
+  margin-right: 6rem;
 }
 
 .Nav-btn {
   background-color: #197278;
-  width: 135px;
+  width: fit-content;
   height: 60px;
   border-radius: 15px;
   font-size: 40px;
+  border-color: black;
+  color: #F5F5F5;
 }
 
 .Nav-Buttons-One {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  margin-right: 1rem;
+  margin-right: 6rem;
   margin-bottom: 6rem;
+  border-color: black;
+  color: #F5F5F5;
 }
 
 .Box {
@@ -115,6 +119,8 @@ h1 {
 
 .Start-btn {
   background-color: #197278;
+  border-color: black;
+  color: #F5F5F5;
   margin: 2.5rem;
   width: 180px;
   height: 80px;
@@ -284,6 +290,10 @@ footer {
   margin-bottom: 1.5rem;
 }
 
+.end-note {
+  font-size: 20px;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -298,6 +308,29 @@ footer {
   }
 }
 
+@media (max-width: 330px) {
+  .Nav-Buttons {
+    margin-left: .1rem;
+    margin-right: .1rem;
+  }
+
+  .Nav-Buttons-One {
+    margin-right: .1rem;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .Nav-Buttons {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .Nav-Buttons-One {
+    margin-right: 1rem;
+  }
+}
+
 @media (max-width: 760px) {
   h1 {
     font-size: 50px;
@@ -305,12 +338,33 @@ footer {
 
   .loader {
     width: 10rem;
-  height: 10rem;
+    height: 10rem;
   }
   
   #Address, #City, #State, #Zip {
     font-size: 20px;
   }
 }
+
+@media (min-width: 760px) {
+  .Q {
+    margin-left: 4rem;
+  }
+
+  .L {
+    margin-left: .5rem;
+  }
+
+  .Nav-Buttons {
+    margin-left: 8rem;
+    margin-right: 8rem;
+  }
+  
+  .Nav-Buttons-One {
+    margin-right: 8rem;
+  }
+
+}
+
 
 

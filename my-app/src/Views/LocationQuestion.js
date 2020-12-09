@@ -87,7 +87,7 @@ class LocationQuestion extends Component {
     return (
       <div className="Question-page">
         <div className="Question">
-          <p className="Q">
+          <p className="Q L">
             Please enter a location.<span className="required">*</span>
           </p>
           <div className="Location-form">

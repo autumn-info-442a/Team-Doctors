@@ -39,7 +39,7 @@ class QuestionTemplate extends Component {
             <div className="Checkboxes">
               <div className="CB">
                 <input
-                  type="checkbox"
+                  type="radio"
                   id="Yes"
                   name="Yes"
                   value="Yes"
@@ -51,7 +51,7 @@ class QuestionTemplate extends Component {
               </div>
               <div className="CB">
                 <input
-                  type="checkbox"
+                  type="radio"
                   id="No"
                   name="No"
                   value="No"
