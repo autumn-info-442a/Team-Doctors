@@ -129,7 +129,7 @@ h1 {
   border-color: black;
   color: #F5F5F5;
   margin: 2.5rem;
-  width: 180px;
+  width: fit-content;
   height: 80px;
   border-radius: 25px;
   font-size: 50px;
@@ -322,6 +322,10 @@ footer {
     margin-right: .1rem;
   }
 
+  .Nav-btn {
+    font-size: 25px;
+  }
+
   .Nav-Buttons-One {
     margin-right: .1rem;
   }
@@ -378,5 +382,13 @@ footer {
   }
 }
 
+@media (max-width: 300px) {
+  h1 {
+    font-size: 40px;
+  }
 
+  #Address, #City, #State, #Zip {
+    font-size: 15px;
+  }
+}
 
