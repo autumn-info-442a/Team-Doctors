@@ -96,7 +96,7 @@ class App extends Component {
       this.setState({
        disabled: false,
      });
-   }, 2000)
+   }, 1000)
   }
 
   saveResponse = (response) => {
@@ -224,7 +224,7 @@ class App extends Component {
     return (
       resultsError ? <ErrorResults></ErrorResults> : <div className="App">
           {pageIndex === 0 ? <LandingPage startSurvey={this.startSurvey}></LandingPage> : null}
-          {pageIndex === 1 ? <LocationQuestion goNext={this.goNext} saveResponse={this.saveResponse} getCurrentResponse={this.getCurrentResponse}></LocationQuestion> : null}
+          {pageIndex === 1 ? <LocationQuestion goNext={this.goNext} saveResponse={this.saveResponse} getCurrentResponse={this.getCurrentResponse} disabled={this.state.disabled}></LocationQuestion> : null}
           {pageIndex === 2 ? questionTemplates[0] : null}
           {pageIndex === 3 ? questionTemplates[1] : null}
           {pageIndex === 4 ? questionTemplates[2] : null}
