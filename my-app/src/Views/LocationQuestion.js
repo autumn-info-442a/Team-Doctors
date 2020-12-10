@@ -112,7 +112,7 @@ class LocationQuestion extends Component {
           </div>
         </div>
         <div className="Nav-Buttons-One">
-          <button onClick={this.canGoNext} type="button" className="Nav-btn" disabled={this.props.disabled}>
+          <button onClick={this.canGoNext} type="button" className="Nav-btn" disabled={this.props.nextDisabled}>
             NEXT
           </button>
         </div>

@@ -21,13 +21,12 @@ class App extends Component {
         results: [],
         lastUpdated: [],
         resultsError: false,
-        disabled: false
+        nextDisabled: false
     }
 
     this.getSurveyQuestions = this.getSurveyQuestions.bind(this);
     this.getTestingCenters = this.getTestingCenters.bind(this);
     this.getCurrentResponse = this.getCurrentResponse.bind(this);
-    this.startSurvey = this.startSurvey.bind(this);
     this.goNext = this.goNext.bind(this);
     this.saveResponse = this.saveResponse.bind(this);
     this.goBack = this.goBack.bind(this);
@@ -83,20 +82,18 @@ class App extends Component {
     return this.state.responses[this.state.pageIndex - 1];
   }
 
-  startSurvey() {
-      this.setState({pageIndex: this.state.pageIndex + 1});
-  }
-
   goNext() {
-    this.setState({
-        pageIndex: this.state.pageIndex + 1,
-        disabled: true
-    });
-    setTimeout(()=>{
+    if (this.state.nextDisabled === false) {
       this.setState({
-       disabled: false,
-     });
-   }, 1000)
+        pageIndex: this.state.pageIndex + 1,
+        nextDisabled: true
+      });
+      setTimeout(()=>{
+        this.setState({
+        nextDisabled: false,
+      });
+    }, 1000)
+    }
   }
 
   saveResponse = (response) => {
@@ -216,15 +213,15 @@ class App extends Component {
           goNext={this.goNext} saveResponse={this.saveResponse} 
           goBack={this.goBack} questionText={questions[i].question} 
           getCurrentResponse={this.getCurrentResponse}
-          disabled={this.state.disabled}>
+          nextDisabled={this.state.nextDisabled}>
         </QuestionTemplate>
       );
     }
 
     return (
       resultsError ? <ErrorResults></ErrorResults> : <div className="App">
-          {pageIndex === 0 ? <LandingPage startSurvey={this.startSurvey}></LandingPage> : null}
-          {pageIndex === 1 ? <LocationQuestion goNext={this.goNext} saveResponse={this.saveResponse} getCurrentResponse={this.getCurrentResponse} disabled={this.state.disabled}></LocationQuestion> : null}
+          {pageIndex === 0 ? <LandingPage goNext={this.goNext}></LandingPage> : null}
+          {pageIndex === 1 ? <LocationQuestion goNext={this.goNext} saveResponse={this.saveResponse} getCurrentResponse={this.getCurrentResponse} nextDisabled={this.state.disabled}></LocationQuestion> : null}
           {pageIndex === 2 ? questionTemplates[0] : null}
           {pageIndex === 3 ? questionTemplates[1] : null}
           {pageIndex === 4 ? questionTemplates[2] : null}
