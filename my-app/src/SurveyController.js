@@ -20,7 +20,8 @@ class App extends Component {
         testingCenters: [],
         results: [],
         lastUpdated: [],
-        resultsError: false
+        resultsError: false,
+        disabled: false
     }
 
     this.getSurveyQuestions = this.getSurveyQuestions.bind(this);
@@ -88,8 +89,14 @@ class App extends Component {
 
   goNext() {
     this.setState({
-        pageIndex: this.state.pageIndex + 1
+        pageIndex: this.state.pageIndex + 1,
+        disabled: true
     });
+    setTimeout(()=>{
+      this.setState({
+       disabled: false,
+     });
+   }, 2000)
   }
 
   saveResponse = (response) => {
@@ -203,7 +210,14 @@ class App extends Component {
 
     for (var i = 1; i < questions.length; i++) {
       questionTemplates.push(
-        <QuestionTemplate key={i} lastQuestion={i === questions.length - 1} goNext={this.goNext} saveResponse={this.saveResponse} goBack={this.goBack} questionText={questions[i].question} getCurrentResponse={this.getCurrentResponse}></QuestionTemplate>
+        <QuestionTemplate 
+          key={i} 
+          lastQuestion={i === questions.length - 1} 
+          goNext={this.goNext} saveResponse={this.saveResponse} 
+          goBack={this.goBack} questionText={questions[i].question} 
+          getCurrentResponse={this.getCurrentResponse}
+          disabled={this.state.disabled}>
+        </QuestionTemplate>
       );
     }
 

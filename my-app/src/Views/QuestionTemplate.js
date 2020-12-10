@@ -67,7 +67,7 @@ class QuestionTemplate extends Component {
             <button onClick={this.props.goBack} type="button" className="Nav-btn">
               BACK
             </button>
-            <button onClick={this.canGoNext} type="button" className="Nav-btn">
+            <button onClick={this.canGoNext} type="button" className="Nav-btn" disabled={this.state.disabled}>
               {this.props.lastQuestion ? "SUBMIT" : "NEXT"}
             </button>
           </div>
